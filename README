@@ -1,0 +1,201 @@
+nspr
+------------------------------------------
+Netscape Portable Runtime (NSPR) provides a platform-neutral API for
+system level and libc like functions. The API is used in the Mozilla
+client, many of Netscape/AOL/iPlanet's and other software offerings.
+
+Runtime requirements:
+  cygwin-1.5.24-2
+
+Build requirements:
+  cygwin-1.5.24-2
+  autoconf2.1-2.13-2
+  binutils-20060817-1
+  gawk-3.1.5-4
+  gcc-core-3.4.4-3
+  make-3.81-1
+  sed-4.1.5-2
+
+Canonical website:
+  http://www.mozilla.org/projects/nspr/
+
+Canonical download:
+  ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/
+
+-------------------------------------------
+
+Build instructions:
+  unpack nspr-4.6.5-X-src.tar.bz2
+    if you use setup to install this src package, it will be
+	 unpacked under /usr/src automatically
+  cd /usr/src
+  cygport ./nspr-4.6.5-X.cygport all
+
+This will create:
+  /usr/src/nspr-4.6.5-X-src.tar.bz2
+  /usr/src/nspr-4.6.5-X.tar.bz2
+  /usr/src/nspr-devel-4.6.5-X.tar.bz2
+
+-------------------------------------------
+
+Files included in the binary packages:
+
+(nspr)
+  /usr/bin/cygnspr4.dll
+  /usr/bin/cygplc4.dll
+  /usr/bin/cygplds4.dll
+  /usr/share/doc/Cygwin/nspr-4.6.5.README
+
+(nspr-devel)
+  /usr/include/nspr/md/_aix.h
+  /usr/include/nspr/md/_aix32.cfg
+  /usr/include/nspr/md/_aix64.cfg
+  /usr/include/nspr/md/_beos.cfg
+  /usr/include/nspr/md/_beos.h
+  /usr/include/nspr/md/_bsdi.cfg
+  /usr/include/nspr/md/_bsdi.h
+  /usr/include/nspr/md/_cygwin.cfg
+  /usr/include/nspr/md/_cygwin.h
+  /usr/include/nspr/md/_darwin.cfg
+  /usr/include/nspr/md/_darwin.h
+  /usr/include/nspr/md/_dgux.cfg
+  /usr/include/nspr/md/_dgux.h
+  /usr/include/nspr/md/_freebsd.cfg
+  /usr/include/nspr/md/_freebsd.h
+  /usr/include/nspr/md/_hpux.h
+  /usr/include/nspr/md/_hpux32.cfg
+  /usr/include/nspr/md/_hpux64.cfg
+  /usr/include/nspr/md/_irix.h
+  /usr/include/nspr/md/_irix32.cfg
+  /usr/include/nspr/md/_irix64.cfg
+  /usr/include/nspr/md/_linux.cfg
+  /usr/include/nspr/md/_linux.h
+  /usr/include/nspr/md/_macos.h
+  /usr/include/nspr/md/_ncr.cfg
+  /usr/include/nspr/md/_ncr.h
+  /usr/include/nspr/md/_nec.cfg
+  /usr/include/nspr/md/_nec.h
+  /usr/include/nspr/md/_netbsd.cfg
+  /usr/include/nspr/md/_netbsd.h
+  /usr/include/nspr/md/_nextstep.cfg
+  /usr/include/nspr/md/_nextstep.h
+  /usr/include/nspr/md/_nspr_pthread.h
+  /usr/include/nspr/md/_nto.cfg
+  /usr/include/nspr/md/_nto.h
+  /usr/include/nspr/md/_openbsd.cfg
+  /usr/include/nspr/md/_openbsd.h
+  /usr/include/nspr/md/_openvms.cfg
+  /usr/include/nspr/md/_openvms.h
+  /usr/include/nspr/md/_os2.cfg
+  /usr/include/nspr/md/_os2.h
+  /usr/include/nspr/md/_os2_errors.h
+  /usr/include/nspr/md/_osf1.cfg
+  /usr/include/nspr/md/_osf1.h
+  /usr/include/nspr/md/_pcos.h
+  /usr/include/nspr/md/_pth.h
+  /usr/include/nspr/md/_qnx.cfg
+  /usr/include/nspr/md/_qnx.h
+  /usr/include/nspr/md/_reliantunix.cfg
+  /usr/include/nspr/md/_reliantunix.h
+  /usr/include/nspr/md/_rhapsody.cfg
+  /usr/include/nspr/md/_rhapsody.h
+  /usr/include/nspr/md/_riscos.cfg
+  /usr/include/nspr/md/_riscos.h
+  /usr/include/nspr/md/_scoos.cfg
+  /usr/include/nspr/md/_scoos.h
+  /usr/include/nspr/md/_solaris.cfg
+  /usr/include/nspr/md/_solaris.h
+  /usr/include/nspr/md/_sony.cfg
+  /usr/include/nspr/md/_sony.h
+  /usr/include/nspr/md/_sunos4.cfg
+  /usr/include/nspr/md/_sunos4.h
+  /usr/include/nspr/md/_unix_errors.h
+  /usr/include/nspr/md/_unixos.h
+  /usr/include/nspr/md/_unixware.cfg
+  /usr/include/nspr/md/_unixware.h
+  /usr/include/nspr/md/_unixware7.cfg
+  /usr/include/nspr/md/_win16.cfg
+  /usr/include/nspr/md/_win16.h
+  /usr/include/nspr/md/_win32_errors.h
+  /usr/include/nspr/md/_win95.cfg
+  /usr/include/nspr/md/_win95.h
+  /usr/include/nspr/md/_winnt.cfg
+  /usr/include/nspr/md/_winnt.h
+  /usr/include/nspr/md/prosdep.h
+  /usr/include/nspr/md/sunos4.h
+  /usr/include/nspr/nspr.h
+  /usr/include/nspr/obsolete/pralarm.h
+  /usr/include/nspr/obsolete/probslet.h
+  /usr/include/nspr/obsolete/protypes.h
+  /usr/include/nspr/obsolete/prsem.h
+  /usr/include/nspr/plarena.h
+  /usr/include/nspr/plarenas.h
+  /usr/include/nspr/plbase64.h
+  /usr/include/nspr/plerror.h
+  /usr/include/nspr/plgetopt.h
+  /usr/include/nspr/plhash.h
+  /usr/include/nspr/plresolv.h
+  /usr/include/nspr/plstr.h
+  /usr/include/nspr/pratom.h
+  /usr/include/nspr/prbit.h
+  /usr/include/nspr/prclist.h
+  /usr/include/nspr/prcmon.h
+  /usr/include/nspr/prcountr.h
+  /usr/include/nspr/prcpucfg.h
+  /usr/include/nspr/prcvar.h
+  /usr/include/nspr/prdtoa.h
+  /usr/include/nspr/prenv.h
+  /usr/include/nspr/prerr.h
+  /usr/include/nspr/prerror.h
+  /usr/include/nspr/prinet.h
+  /usr/include/nspr/prinit.h
+  /usr/include/nspr/prinrval.h
+  /usr/include/nspr/prio.h
+  /usr/include/nspr/pripcsem.h
+  /usr/include/nspr/private/pprio.h
+  /usr/include/nspr/private/pprthred.h
+  /usr/include/nspr/private/prpriv.h
+  /usr/include/nspr/prlink.h
+  /usr/include/nspr/prlock.h
+  /usr/include/nspr/prlog.h
+  /usr/include/nspr/prlong.h
+  /usr/include/nspr/prmem.h
+  /usr/include/nspr/prmon.h
+  /usr/include/nspr/prmwait.h
+  /usr/include/nspr/prnetdb.h
+  /usr/include/nspr/prolock.h
+  /usr/include/nspr/prpdce.h
+  /usr/include/nspr/prprf.h
+  /usr/include/nspr/prproces.h
+  /usr/include/nspr/prrng.h
+  /usr/include/nspr/prrwlock.h
+  /usr/include/nspr/prshm.h
+  /usr/include/nspr/prshma.h
+  /usr/include/nspr/prsystem.h
+  /usr/include/nspr/prthread.h
+  /usr/include/nspr/prtime.h
+  /usr/include/nspr/prtpool.h
+  /usr/include/nspr/prtrace.h
+  /usr/include/nspr/prtypes.h
+  /usr/include/nspr/prvrsion.h
+  /usr/include/nspr/prwin16.h
+  /usr/lib/nspr/libnspr4.dll.a
+  /usr/lib/nspr/libnspr4_s.a
+  /usr/lib/nspr/libplc4.dll.a
+  /usr/lib/nspr/libplc4_s.a
+  /usr/lib/nspr/libplds4.dll.a
+  /usr/lib/nspr/libplds4_s.a
+
+------------------
+
+Port Notes:
+
+----- version 4.6.5-1 -----
+Version bump.
+
+----- version 4.6-1 -----
+Initial release for Cygwin.
+
+
+Cygwin port maintained by:
+http://cygwinports.dotsrc.org/
