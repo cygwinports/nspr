@@ -47,6 +47,7 @@ Files included in the binary packages:
   /usr/share/doc/Cygwin/nspr-4.6.5.README
 
 (nspr-devel)
+  /usr/bin/nspr-config
   /usr/include/nspr/md/_aix.h
   /usr/include/nspr/md/_aix32.cfg
   /usr/include/nspr/md/_aix64.cfg
