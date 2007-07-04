@@ -35,19 +35,22 @@ Build instructions:
 This will create:
   /usr/src/nspr-4.6.6-X-src.tar.bz2
   /usr/src/nspr-4.6.6-X.tar.bz2
-  /usr/src/nspr-devel-4.6.6-X.tar.bz2
+  /usr/src/libnspr-devel-4.6.6-X.tar.bz2
+  /usr/src/libnspr4-4.6.6-X.tar.bz2
 
 -------------------------------------------
 
 Files included in the binary packages:
 
 (nspr)
+  /usr/share/doc/Cygwin/nspr-4.6.6.README
+
+(libnspr4)
   /usr/bin/cygnspr4.dll
   /usr/bin/cygplc4.dll
   /usr/bin/cygplds4.dll
-  /usr/share/doc/Cygwin/nspr-4.6.6.README
 
-(nspr-devel)
+(libnspr-devel)
   /usr/bin/nspr-config
   /usr/include/nspr/md/_aix.h
   /usr/include/nspr/md/_aix32.cfg
@@ -187,10 +190,14 @@ Files included in the binary packages:
   /usr/lib/nspr/libplc4_s.a
   /usr/lib/nspr/libplds4.dll.a
   /usr/lib/nspr/libplds4_s.a
+  /usr/lib/pkgconfig/nspr.pc
 
 ------------------
 
 Port Notes:
+
+----- version 4.6.6-2 -----
+Include nspr.pc file.
 
 ----- version 4.6.6-1 -----
 Version bump.

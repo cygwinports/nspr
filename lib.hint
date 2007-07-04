@@ -1,6 +1,7 @@
 category: Libs
-requires: cygwin libnspr4
-sdesc: "Netscape Portable Runtime library (documentation)"
+requires: cygwin
+external-source: nspr
+sdesc: "Netscape Portable Runtime libraries (runtime)"
 ldesc: "Netscape Portable Runtime (NSPR) provides a platform-neutral API for
 system level and libc like functions. The API is used in the Mozilla
 client, many of Netscape/AOL/iPlanet's and other software offerings."
