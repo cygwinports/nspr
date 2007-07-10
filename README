@@ -11,7 +11,7 @@ Build requirements:
   cygwin-1.5.24-2
   autoconf2.1-2.13-2
   binutils-20060817-1
-  cygport-0.2.11-1
+  cygport-0.3.1-1
   gawk-3.1.5-4
   gcc-core-3.4.4-3
   make-3.81-1
@@ -26,24 +26,24 @@ Canonical download:
 -------------------------------------------
 
 Build instructions:
-  unpack nspr-4.6.6-X-src.tar.bz2
+  unpack nspr-4.6.7-X-src.tar.bz2
     if you use setup to install this src package, it will be
 	 unpacked under /usr/src automatically
   cd /usr/src
-  cygport ./nspr-4.6.6-X.cygport all
+  cygport ./nspr-4.6.7-X.cygport all
 
 This will create:
-  /usr/src/nspr-4.6.6-X-src.tar.bz2
-  /usr/src/nspr-4.6.6-X.tar.bz2
-  /usr/src/libnspr-devel-4.6.6-X.tar.bz2
-  /usr/src/libnspr4-4.6.6-X.tar.bz2
+  /usr/src/nspr-4.6.7-X-src.tar.bz2
+  /usr/src/nspr-4.6.7-X.tar.bz2
+  /usr/src/libnspr-devel-4.6.7-X.tar.bz2
+  /usr/src/libnspr4-4.6.7-X.tar.bz2
 
 -------------------------------------------
 
 Files included in the binary packages:
 
 (nspr)
-  /usr/share/doc/Cygwin/nspr-4.6.6.README
+  /usr/share/doc/Cygwin/nspr-4.6.7.README
 
 (libnspr4)
   /usr/bin/cygnspr4.dll
@@ -195,6 +195,9 @@ Files included in the binary packages:
 ------------------
 
 Port Notes:
+
+----- version 4.6.7-1 -----
+Version bump.
 
 ----- version 4.6.6-2 -----
 Include nspr.pc file.
