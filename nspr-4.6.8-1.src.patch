@@ -1,0 +1,1270 @@
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/config/nspr.pc.in src/nspr-4.6.8/mozilla/nsprpub/config/nspr.pc.in
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/config/nspr.pc.in	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.6.8/mozilla/nsprpub/config/nspr.pc.in	2008-05-02 13:55:59.140625000 -0500
+@@ -0,0 +1,11 @@
++prefix=@prefix@
++exec_prefix=@exec_prefix@
++libdir=@libdir@
++includedir=@includedir@
++
++Name: NSPR
++Description: The Netscape Portable Runtime
++Version: @MOD_MAJOR_VERSION@.@MOD_MINOR_VERSION@.@MOD_PATCH_VERSION@
++Libs: -L${libdir} -lplds4 -lplc4 -lnspr4 @OS_LIBS@
++Cflags: -I${includedir}
++
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/config/rules.mk src/nspr-4.6.8/mozilla/nsprpub/config/rules.mk
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/config/rules.mk	2006-02-22 16:53:55.000000000 -0600
++++ src/nspr-4.6.8/mozilla/nsprpub/config/rules.mk	2008-05-02 13:55:59.156250000 -0500
+@@ -104,7 +104,7 @@
+ #
+ 
+ ifdef LIBRARY_NAME
+-ifeq (,$(filter-out WINNT OS2,$(OS_ARCH)))
++ifeq (,$(filter-out WINNT OS2 CYGWIN,$(OS_ARCH)))
+ 
+ #
+ # Win95, Win16, and OS/2 require library names conforming to the 8.3 rule.
+@@ -117,8 +117,8 @@
+ SHARED_LIB_PDB	= $(OBJDIR)/$(LIBRARY_NAME)$(LIBRARY_VERSION).pdb
+ else
+ LIBRARY		= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION)_s.$(LIB_SUFFIX)
+-SHARED_LIBRARY	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).$(DLL_SUFFIX)
+-IMPORT_LIBRARY	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).$(LIB_SUFFIX)
++SHARED_LIBRARY	= $(OBJDIR)/cyg$(LIBRARY_NAME)$(LIBRARY_VERSION).$(DLL_SUFFIX)
++IMPORT_LIBRARY	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).$(DLL_SUFFIX).$(LIB_SUFFIX)
+ SHARED_LIB_PDB	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).pdb
+ endif
+ 
+@@ -137,7 +137,7 @@
+ endif
+ 
+ ifndef TARGETS
+-ifeq (,$(filter-out WINNT OS2,$(OS_ARCH)))
++ifeq (,$(filter-out WINNT OS2 CYGWIN,$(OS_ARCH)))
+ TARGETS		= $(LIBRARY) $(SHARED_LIBRARY) $(IMPORT_LIBRARY)
+ ifndef BUILD_OPT
+ ifdef MSC_VER
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/configure.in src/nspr-4.6.8/mozilla/nsprpub/configure.in
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/configure.in	2007-10-31 13:07:38.000000000 -0500
++++ src/nspr-4.6.8/mozilla/nsprpub/configure.in	2008-05-02 13:55:59.171875000 -0500
+@@ -94,7 +94,7 @@
+ HOST_LDFLAGS="${HOST_LDFLAGS=}"
+ 
+ case "$target" in
+-*-cygwin*|*-mingw*)
++*-mingw*)
+     # Check to see if we are really running in a msvc environemnt
+     _WIN32_MSVC=
+     AC_CHECK_PROGS(CC, cl)
+@@ -741,10 +741,23 @@
+         CPU_ARCH=x86
+     fi
+     ;;
+-CYGWIN_NT*|MINGW*_NT*)
++CYGWIN_NT*)
+ #
+ # If uname -s returns "CYGWIN_NT-4.0", we assume that we are using
+ # the uname.exe in the Cygwin tools.
++#
++    OS_RELEASE=`expr $OS_ARCH : '.*NT-\(.*\)'`
++    OS_ARCH=CYGWIN
++    CPU_ARCH=`uname -m`
++    #
++    # Cygwin's uname -m returns "i686" on a Pentium Pro machine.
++    #
++    if echo "$CPU_ARCH" | grep -c 86 >/dev/null; then
++        CPU_ARCH=x86
++    fi
++    ;;
++MINGW*_NT*)
++#
+ # If uname -s returns MINGW32_NT-5.1, we assume that we are using
+ # the uname.exe in the MSYS tools.
+ #
+@@ -786,7 +799,7 @@
+ *-mingw*)
+     NSINSTALL=nsinstall
+     ;;
+-*-cygwin*|*-msvc*|*-mks*)
++*-msvc*|*-mks*)
+     NSINSTALL='$(CYGWIN_WRAPPER) nsinstall'
+     if test `echo "${PATH}" | grep -c \;` = 0; then
+         CYGWIN_WRAPPER='sh $(topsrcdir)/build/cygwin-wrapper'
+@@ -961,6 +974,32 @@
+ 
+     ;;
+ 
++*-cygwin*)
++    AC_DEFINE(CYGWIN)
++    AC_DEFINE(XP_UNIX)
++    RESOLVE_LINK_SYMBOLS=1
++    AC_DEFINE(HAVE_FCNTL_FILE_LOCKING)
++    AC_DEFINE(PT_NO_SIGTIMEDWAIT)
++    PR_MD_CSRCS=cygwin.c
++    PR_MD_ASFILES=os_Cygwin_x86.s
++    CPU_ARCH_TAG=
++    MDCPUCFG_H=_cygwin.cfg
++    AC_DEFINE(_X86_)
++
++    CC="$CC"
++    CXX="$CXX"
++    DLL_SUFFIX=dll
++    IMPORT_LIBRARY='lib$(LIBRARY_NAME).$(DLL_SUFFIX).$(LIB_SUFFIX)'
++    MKSHLIB='$(CC) -shared -Wl,--enable-auto-image-base -Wl,--out-implib,$(IMPORT_LIBRARY) -o $(subst $(OBJDIR)/,,$(SHARED_LIBRARY))'
++    RC=$WINDRES
++    # Use temp file for windres (bug 213281)
++    RCFLAGS='-O coff --use-temp-file'
++
++    if test -n "$USE_STATIC_TLS"; then
++        AC_DEFINE(_PR_USE_STATIC_TLS)
++    fi
++    ;;
++
+ *-darwin*)
+     AC_DEFINE(XP_UNIX)
+     AC_DEFINE(DARWIN)
+@@ -1462,7 +1501,7 @@
+     esac    
+     ;;
+ 
+-*-mingw*|*-cygwin*|*-msvc*|*-mks*)
++*-mingw*|*-msvc*|*-mks*)
+     AC_DEFINE(XP_PC)
+     AC_DEFINE(WIN32)
+     PR_MD_ARCH_DIR=windows
+@@ -2569,7 +2608,7 @@
+         AC_DEFINE(_PR_LOCAL_THREADS_ONLY)
+     fi
+     ;;
+-*-mingw*|*-cygwin*|*-msvc*|*-mks*)
++*-mingw*|*-msvc*|*-mks*)
+     dnl win32 does not use pthreads
+     USE_PTHREADS=
+     _PTHREAD_LDFLAGS=
+@@ -2781,6 +2820,7 @@
+ config/nsprincl.mk
+ config/nsprincl.sh
+ config/nspr-config
++config/nspr.pc
+ lib/Makefile 
+ lib/ds/Makefile 
+ lib/libc/Makefile 
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.cfg src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.cfg
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.cfg	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.cfg	2008-05-02 13:55:59.187500000 -0500
+@@ -0,0 +1,196 @@
++/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++
++/* ***** BEGIN LICENSE BLOCK *****
++ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
++ *
++ * The contents of this file are subject to the Mozilla Public License Version
++ * 1.1 (the "License"); you may not use this file except in compliance with
++ * the License. You may obtain a copy of the License at
++ * http://www.mozilla.org/MPL/
++ *
++ * Software distributed under the License is distributed on an "AS IS" basis,
++ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
++ * for the specific language governing rights and limitations under the
++ * License.
++ *
++ * The Original Code is the Netscape Portable Runtime (NSPR).
++ *
++ * The Initial Developer of the Original Code is
++ * Netscape Communications Corporation.
++ * Portions created by the Initial Developer are Copyright (C) 1998-2000
++ * the Initial Developer. All Rights Reserved.
++ *
++ * Contributor(s):
++ *
++ * Alternatively, the contents of this file may be used under the terms of
++ * either the GNU General Public License Version 2 or later (the "GPL"), or
++ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
++ * in which case the provisions of the GPL or the LGPL are applicable instead
++ * of those above. If you wish to allow use of your version of this file only
++ * under the terms of either the GPL or the LGPL, and not to allow others to
++ * use your version of this file under the terms of the MPL, indicate your
++ * decision by deleting the provisions above and replace them with the notice
++ * and other provisions required by the GPL or the LGPL. If you do not delete
++ * the provisions above, a recipient may use your version of this file under
++ * the terms of any one of the MPL, the GPL or the LGPL.
++ *
++ * ***** END LICENSE BLOCK ***** */
++#ifndef nspr_cpucfg___
++#define nspr_cpucfg___
++
++#ifndef XP_UNIX
++#define XP_UNIX
++#endif
++
++#ifndef CYGWIN
++#define CYGWIN
++#endif
++
++#define PR_AF_INET6 23  /* same as AF_INET6 */
++
++#if defined(_M_IX86) || defined(_X86_)
++
++#define IS_LITTLE_ENDIAN 1
++#undef  IS_BIG_ENDIAN
++
++#define PR_BYTES_PER_BYTE   1
++#define PR_BYTES_PER_SHORT  2
++#define PR_BYTES_PER_INT    4
++#define PR_BYTES_PER_INT64  8
++#define PR_BYTES_PER_LONG   4
++#define PR_BYTES_PER_FLOAT  4
++#define PR_BYTES_PER_WORD	4
++#define PR_BYTES_PER_DWORD	8
++#define PR_BYTES_PER_DOUBLE 8
++
++#define PR_BITS_PER_BYTE    8
++#define PR_BITS_PER_SHORT   16
++#define PR_BITS_PER_INT     32
++#define PR_BITS_PER_INT64   64
++#define PR_BITS_PER_LONG    32
++#define PR_BITS_PER_FLOAT   32
++#define PR_BITS_PER_WORD	32
++#define PR_BITS_PER_DWORD	64
++#define PR_BITS_PER_DOUBLE  64
++
++#define PR_BITS_PER_BYTE_LOG2   3
++#define PR_BITS_PER_SHORT_LOG2  4
++#define PR_BITS_PER_INT_LOG2    5
++#define PR_BITS_PER_INT64_LOG2  6
++#define PR_BITS_PER_LONG_LOG2   5
++#define PR_BITS_PER_FLOAT_LOG2  5
++#define PR_BITS_PER_WORD_LOG2	5
++#define PR_BITS_PER_DWORD_LOG2	6
++#define PR_BITS_PER_DOUBLE_LOG2 6
++
++#define PR_ALIGN_OF_SHORT   2
++#define PR_ALIGN_OF_INT     4
++#define PR_ALIGN_OF_LONG    4
++#define PR_ALIGN_OF_INT64   8
++#define PR_ALIGN_OF_FLOAT   4
++#define PR_ALIGN_OF_WORD	4
++#define PR_ALIGN_OF_DWORD	8
++#define PR_ALIGN_OF_DOUBLE  4
++#define PR_ALIGN_OF_POINTER 4
++
++#define PR_BYTES_PER_WORD_LOG2	2
++#define PR_BYTES_PER_DWORD_LOG2	2
++
++#elif defined(_ALPHA_)
++
++#define IS_LITTLE_ENDIAN 1
++#undef  IS_BIG_ENDIAN
++
++#define PR_BYTES_PER_BYTE   1
++#define PR_BYTES_PER_SHORT  2
++#define PR_BYTES_PER_INT    4
++#define PR_BYTES_PER_INT64  8
++#define PR_BYTES_PER_LONG   4
++#define PR_BYTES_PER_FLOAT  4
++#define PR_BYTES_PER_DOUBLE 8
++#define PR_BYTES_PER_WORD   4
++#define PR_BYTES_PER_DWORD  8
++
++#define PR_BITS_PER_BYTE    8
++#define PR_BITS_PER_SHORT   16
++#define PR_BITS_PER_INT     32
++#define PR_BITS_PER_INT64   64
++#define PR_BITS_PER_LONG    32
++#define PR_BITS_PER_FLOAT   32
++#define PR_BITS_PER_DOUBLE  64
++#define PR_BITS_PER_WORD    32
++
++#define PR_BITS_PER_BYTE_LOG2   3
++#define PR_BITS_PER_SHORT_LOG2  4
++#define PR_BITS_PER_INT_LOG2    5
++#define PR_BITS_PER_INT64_LOG2  6
++#define PR_BITS_PER_LONG_LOG2   5
++#define PR_BITS_PER_FLOAT_LOG2  5
++#define PR_BITS_PER_DOUBLE_LOG2 6
++#define PR_BITS_PER_WORD_LOG2   5
++
++#define PR_BYTES_PER_WORD_LOG2  2
++#define PR_BYTES_PER_DWORD_LOG2 3
++
++#define PR_ALIGN_OF_SHORT   2
++#define PR_ALIGN_OF_INT     4
++#define PR_ALIGN_OF_LONG    4
++#define PR_ALIGN_OF_INT64   8
++#define PR_ALIGN_OF_FLOAT   4
++#define PR_ALIGN_OF_DOUBLE  8
++#define PR_ALIGN_OF_POINTER 4
++
++#else /* defined(_M_IX86) || defined(_X86_) */
++
++#error unknown processor architecture
++
++#endif /* defined(_M_IX86) || defined(_X86_) */
++
++#define HAVE_LONG_LONG
++
++#ifndef NO_NSPR_10_SUPPORT
++
++#define BYTES_PER_BYTE      PR_BYTES_PER_BYTE
++#define BYTES_PER_SHORT     PR_BYTES_PER_SHORT
++#define BYTES_PER_INT       PR_BYTES_PER_INT
++#define BYTES_PER_INT64     PR_BYTES_PER_INT64
++#define BYTES_PER_LONG      PR_BYTES_PER_LONG
++#define BYTES_PER_FLOAT     PR_BYTES_PER_FLOAT
++#define BYTES_PER_DOUBLE    PR_BYTES_PER_DOUBLE
++#define BYTES_PER_WORD      PR_BYTES_PER_WORD
++#define BYTES_PER_DWORD     PR_BYTES_PER_DWORD
++
++#define BITS_PER_BYTE       PR_BITS_PER_BYTE
++#define BITS_PER_SHORT      PR_BITS_PER_SHORT
++#define BITS_PER_INT        PR_BITS_PER_INT
++#define BITS_PER_INT64      PR_BITS_PER_INT64
++#define BITS_PER_LONG       PR_BITS_PER_LONG
++#define BITS_PER_FLOAT      PR_BITS_PER_FLOAT
++#define BITS_PER_DOUBLE     PR_BITS_PER_DOUBLE
++#define BITS_PER_WORD       PR_BITS_PER_WORD
++
++#define BITS_PER_BYTE_LOG2  PR_BITS_PER_BYTE_LOG2
++#define BITS_PER_SHORT_LOG2 PR_BITS_PER_SHORT_LOG2
++#define BITS_PER_INT_LOG2   PR_BITS_PER_INT_LOG2
++#define BITS_PER_INT64_LOG2 PR_BITS_PER_INT64_LOG2
++#define BITS_PER_LONG_LOG2  PR_BITS_PER_LONG_LOG2
++#define BITS_PER_FLOAT_LOG2 PR_BITS_PER_FLOAT_LOG2
++#define BITS_PER_DOUBLE_LOG2    PR_BITS_PER_DOUBLE_LOG2
++#define BITS_PER_WORD_LOG2  PR_BITS_PER_WORD_LOG2
++
++#define ALIGN_OF_SHORT      PR_ALIGN_OF_SHORT
++#define ALIGN_OF_INT        PR_ALIGN_OF_INT
++#define ALIGN_OF_LONG       PR_ALIGN_OF_LONG
++#define ALIGN_OF_INT64      PR_ALIGN_OF_INT64
++#define ALIGN_OF_FLOAT      PR_ALIGN_OF_FLOAT
++#define ALIGN_OF_DOUBLE     PR_ALIGN_OF_DOUBLE
++#define ALIGN_OF_POINTER    PR_ALIGN_OF_POINTER
++#define ALIGN_OF_WORD       PR_ALIGN_OF_WORD
++
++#define BYTES_PER_WORD_LOG2		PR_BYTES_PER_WORD_LOG2
++#define BYTES_PER_DWORD_LOG2    PR_BYTES_PER_DWORD_LOG2
++#define WORDS_PER_DWORD_LOG2    PR_WORDS_PER_DWORD_LOG2
++
++#endif /* NO_NSPR_10_SUPPORT */
++
++#endif /* nspr_cpucfg___ */
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.h src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.h
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.h	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.h	2008-05-02 13:55:59.218750000 -0500
+@@ -0,0 +1,501 @@
++/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* ***** BEGIN LICENSE BLOCK *****
++ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
++ *
++ * The contents of this file are subject to the Mozilla Public License Version
++ * 1.1 (the "License"); you may not use this file except in compliance with
++ * the License. You may obtain a copy of the License at
++ * http://www.mozilla.org/MPL/
++ *
++ * Software distributed under the License is distributed on an "AS IS" basis,
++ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
++ * for the specific language governing rights and limitations under the
++ * License.
++ *
++ * The Original Code is the Netscape Portable Runtime (NSPR).
++ *
++ * The Initial Developer of the Original Code is
++ * Netscape Communications Corporation.
++ * Portions created by the Initial Developer are Copyright (C) 1998-2000
++ * the Initial Developer. All Rights Reserved.
++ *
++ * Contributor(s):
++ *
++ * Alternatively, the contents of this file may be used under the terms of
++ * either the GNU General Public License Version 2 or later (the "GPL"), or
++ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
++ * in which case the provisions of the GPL or the LGPL are applicable instead
++ * of those above. If you wish to allow use of your version of this file only
++ * under the terms of either the GPL or the LGPL, and not to allow others to
++ * use your version of this file under the terms of the MPL, indicate your
++ * decision by deleting the provisions above and replace them with the notice
++ * and other provisions required by the GPL or the LGPL. If you do not delete
++ * the provisions above, a recipient may use your version of this file under
++ * the terms of any one of the MPL, the GPL or the LGPL.
++ *
++ * ***** END LICENSE BLOCK ***** */
++
++#ifndef nspr_cygwin_defs_h___
++#define nspr_cygwin_defs_h___
++
++#include "prthread.h"
++
++/*
++ * Internal configuration macros
++ */
++
++#define PR_LINKER_ARCH	"cygwin"
++#define _PR_SI_SYSNAME  "CYGWIN"
++#ifdef __powerpc__
++#define _PR_SI_ARCHITECTURE "ppc"
++#elif defined(__alpha)
++#define _PR_SI_ARCHITECTURE "alpha"
++#elif defined(__ia64__)
++#define _PR_SI_ARCHITECTURE "ia64"
++#elif defined(__x86_64__)
++#define _PR_SI_ARCHITECTURE "x86-64"
++#elif defined(__mc68000__)
++#define _PR_SI_ARCHITECTURE "m68k"
++#elif defined(__sparc__)
++#define _PR_SI_ARCHITECTURE "sparc"
++#elif defined(__i386__)
++#define _PR_SI_ARCHITECTURE "x86"
++#elif defined(__mips__)
++#define _PR_SI_ARCHITECTURE "mips"
++#elif defined(__arm__)
++#define _PR_SI_ARCHITECTURE "arm"
++#elif defined(__hppa__)
++#define _PR_SI_ARCHITECTURE "hppa"
++#elif defined(__s390x__)
++#define _PR_SI_ARCHITECTURE "s390x"
++#elif defined(__s390__)
++#define _PR_SI_ARCHITECTURE "s390"
++#else
++#error "Unknown CPU architecture"
++#endif
++#define PR_DLL_SUFFIX		".dll"
++
++#define _PR_VMBASE              0x30000000
++#define _PR_STACK_VMBASE	0x50000000
++#define _MD_DEFAULT_STACK_SIZE	65536L
++#define _MD_MMAP_FLAGS          MAP_PRIVATE
++
++#undef	HAVE_STACK_GROWING_UP
++
++/*
++ * Elf linux supports dl* functions
++ */
++#define HAVE_DLL
++#define USE_DLFCN
++
++#if defined(__i386__)
++#define _PR_HAVE_ATOMIC_OPS
++#define _MD_INIT_ATOMIC()
++extern PRInt32 _PR_x86_AtomicIncrement(PRInt32 *val);
++#define _MD_ATOMIC_INCREMENT          _PR_x86_AtomicIncrement
++extern PRInt32 _PR_x86_AtomicDecrement(PRInt32 *val);
++#define _MD_ATOMIC_DECREMENT          _PR_x86_AtomicDecrement
++extern PRInt32 _PR_x86_AtomicAdd(PRInt32 *ptr, PRInt32 val);
++#define _MD_ATOMIC_ADD                _PR_x86_AtomicAdd
++extern PRInt32 _PR_x86_AtomicSet(PRInt32 *val, PRInt32 newval);
++#define _MD_ATOMIC_SET                _PR_x86_AtomicSet
++#endif
++
++#if defined(__ia64__)
++#define _PR_HAVE_ATOMIC_OPS
++#define _MD_INIT_ATOMIC()
++extern PRInt32 _PR_ia64_AtomicIncrement(PRInt32 *val);
++#define _MD_ATOMIC_INCREMENT          _PR_ia64_AtomicIncrement
++extern PRInt32 _PR_ia64_AtomicDecrement(PRInt32 *val);
++#define _MD_ATOMIC_DECREMENT          _PR_ia64_AtomicDecrement
++extern PRInt32 _PR_ia64_AtomicAdd(PRInt32 *ptr, PRInt32 val);
++#define _MD_ATOMIC_ADD                _PR_ia64_AtomicAdd
++extern PRInt32 _PR_ia64_AtomicSet(PRInt32 *val, PRInt32 newval);
++#define _MD_ATOMIC_SET                _PR_ia64_AtomicSet
++#endif
++
++#if defined(__x86_64__)
++#define _PR_HAVE_ATOMIC_OPS
++#define _MD_INIT_ATOMIC()
++extern PRInt32 _PR_x86_64_AtomicIncrement(PRInt32 *val);
++#define _MD_ATOMIC_INCREMENT          _PR_x86_64_AtomicIncrement
++extern PRInt32 _PR_x86_64_AtomicDecrement(PRInt32 *val);
++#define _MD_ATOMIC_DECREMENT          _PR_x86_64_AtomicDecrement
++extern PRInt32 _PR_x86_64_AtomicAdd(PRInt32 *ptr, PRInt32 val);
++#define _MD_ATOMIC_ADD                _PR_x86_64_AtomicAdd
++extern PRInt32 _PR_x86_64_AtomicSet(PRInt32 *val, PRInt32 newval);
++#define _MD_ATOMIC_SET                _PR_x86_64_AtomicSet
++#endif
++
++#define USE_SETJMP
++#if defined(__GLIBC__) && __GLIBC__ >= 2
++#define _PR_POLL_AVAILABLE
++#endif
++#undef _PR_USE_POLL
++#define _PR_STAT_HAS_ONLY_ST_ATIME
++#if defined(__alpha) || defined(__ia64__)
++#define _PR_HAVE_LARGE_OFF_T
++#elif (__GLIBC__ > 2) || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 1)
++#define _PR_HAVE_OFF64_T
++#else
++#define _PR_NO_LARGE_FILES
++#endif
++#if (__GLIBC__ > 2) || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 1)
++#define _PR_INET6
++#define _PR_HAVE_INET_NTOP
++#define _PR_HAVE_GETHOSTBYNAME2
++#define _PR_HAVE_GETADDRINFO
++#define _PR_INET6_PROBE
++#endif
++#define _PR_HAVE_SYSV_SEMAPHORES
++#define PR_HAVE_SYSV_NAMED_SHARED_MEMORY
++#if (__GLIBC__ >= 2) && defined(_PR_PTHREADS)
++#define _PR_HAVE_GETHOST_R
++#define _PR_HAVE_GETHOST_R_INT
++#endif
++
++#ifdef _PR_PTHREADS
++
++extern void _MD_CleanupBeforeExit(void);
++#define _MD_CLEANUP_BEFORE_EXIT _MD_CleanupBeforeExit
++
++#else  /* ! _PR_PTHREADS */
++
++#include <setjmp.h>
++
++#define PR_CONTEXT_TYPE	sigjmp_buf
++
++#define CONTEXT(_th) ((_th)->md.context)
++
++#ifdef __powerpc__
++/*
++ * PowerPC based MkLinux
++ *
++ * On the PowerPC, the new style jmp_buf isn't used until glibc
++ * 2.1.
++ */
++#if (__GLIBC__ > 2) || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 1)
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[JB_GPR1]
++#else
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[0].__misc[0]
++#endif /* glibc 2.1 or later */
++#define _MD_SET_FP(_t, val)
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) ((void *) 0)
++/* aix = 64, macos = 70 */
++#define PR_NUM_GCREGS  64
++
++#elif defined(__alpha)
++/* Alpha based Linux */
++
++#if defined(__GLIBC__) && __GLIBC__ >= 2
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[JB_SP]
++#define _MD_SET_FP(_t, val)
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) ((void *) 0)
++#define _MD_SP_TYPE long int
++#else
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[0].__sp
++#define _MD_SET_FP(_t, val)
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) ((void *) 0)
++#define _MD_SP_TYPE __ptr_t
++#endif /* defined(__GLIBC__) && __GLIBC__ >= 2 */
++
++/* XXX not sure if this is correct, or maybe it should be 17? */
++#define PR_NUM_GCREGS 9
++
++#elif defined(__ia64__)
++
++#define _MD_GET_SP(_t)      ((long *)((_t)->md.context[0].__jmpbuf)[0])
++#define _MD_SET_FP(_t, val)
++#define _MD_GET_SP_PTR(_t)  &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t)  ((void *) 0)
++#define _MD_SP_TYPE         long int
++
++#define PR_NUM_GCREGS       _JBLEN
++
++#elif defined(__mc68000__)
++/* m68k based Linux */
++
++/*
++ * On the m68k, glibc still uses the old style sigjmp_buf, even
++ * in glibc 2.0.7.
++ */
++#if defined(__GLIBC__) && __GLIBC__ >= 2
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[0].__sp
++#define _MD_SET_FP(_t, val)
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) ((void *) 0)
++#define _MD_SP_TYPE int
++#else
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[0].__sp
++#define _MD_SET_FP(_t, val)
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) ((void *) 0)
++#define _MD_SP_TYPE __ptr_t
++#endif /* defined(__GLIBC__) && __GLIBC__ >= 2 */
++
++/* XXX not sure if this is correct, or maybe it should be 17? */
++#define PR_NUM_GCREGS 9
++
++#elif defined(__sparc__)
++/* Sparc */
++#if defined(__GLIBC__) && __GLIBC__ >= 2
++/*
++ * You need glibc2-2.0.7-25 or later. The libraries that came with
++ * Red Hat 5.1 are not new enough, but they are in 5.2.
++ */
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[JB_SP]
++#define _MD_SET_FP(_t, val) ((_t)->md.context[0].__jmpbuf[JB_FP] = val)
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) (&(_t)->md.context[0].__jmpbuf[JB_FP])
++#define _MD_SP_TYPE int
++#else
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[0].__fp
++#define _MD_SET_FP(_t, val)
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) ((void *) 0)
++#define _MD_SP_TYPE __ptr_t
++#endif /* defined(__GLIBC__) && __GLIBC__ >= 2 */
++
++#elif defined(__i386__)
++/* Intel based Linux */
++#if defined(__GLIBC__) && __GLIBC__ >= 2
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[JB_SP]
++#define _MD_SET_FP(_t, val) ((_t)->md.context[0].__jmpbuf[JB_BP] = val)
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) (&(_t)->md.context[0].__jmpbuf[JB_BP])
++#define _MD_SP_TYPE int
++#else
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[0].__sp
++#define _MD_SET_FP(_t, val) ((_t)->md.context[0].__jmpbuf[0].__bp = val)
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) &((_t)->md.context[0].__jmpbuf[0].__bp)
++#define _MD_SP_TYPE __ptr_t
++#endif /* defined(__GLIBC__) && __GLIBC__ >= 2 */
++#define PR_NUM_GCREGS   6
++
++#elif defined(__mips__)
++/* Linux/MIPS */
++#if defined(__GLIBC__) && __GLIBC__ >= 2
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[0].__sp
++#define _MD_SET_FP(_t, val) ((_t)->md.context[0].__jmpbuf[0].__fp = (val))
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) (&(_t)->md.context[0].__jmpbuf[0].__fp)
++#define _MD_SP_TYPE __ptr_t
++#else
++#error "Linux/MIPS pre-glibc2 not supported yet"
++#endif /* defined(__GLIBC__) && __GLIBC__ >= 2 */
++
++#elif defined(__arm__)
++/* ARM/Linux */
++#if defined(__GLIBC__) && __GLIBC__ >= 2
++#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[20]
++#define _MD_SET_FP(_t, val) ((_t)->md.context[0].__jmpbuf[19] = (val))
++#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
++#define _MD_GET_FP_PTR(_t) (&(_t)->md.context[0].__jmpbuf[19])
++#define _MD_SP_TYPE __ptr_t
++#else
++#error "ARM/Linux pre-glibc2 not supported yet"
++#endif /* defined(__GLIBC__) && __GLIBC__ >= 2 */
++
++#else
++
++#error "Unknown CPU architecture"
++
++#endif /*__powerpc__*/
++
++/*
++** Initialize a thread context to run "_main()" when started
++*/
++#ifdef __powerpc__
++
++#define _MD_INIT_CONTEXT(_thread, _sp, _main, status)  \
++{  \
++    *status = PR_TRUE;  \
++    if (sigsetjmp(CONTEXT(_thread), 1)) {  \
++        _main();  \
++    }  \
++    _MD_GET_SP(_thread) = (unsigned char*) ((_sp) - 128); \
++	_thread->md.sp = _MD_GET_SP_PTR(_thread); \
++	_thread->md.fp = _MD_GET_FP_PTR(_thread); \
++    _MD_SET_FP(_thread, 0); \
++}
++
++#elif defined(__mips__)
++
++#define _MD_INIT_CONTEXT(_thread, _sp, _main, status)  \
++{  \
++    *status = PR_TRUE;  \
++    (void) sigsetjmp(CONTEXT(_thread), 1);  \
++    _thread->md.context[0].__jmpbuf[0].__pc = (__ptr_t) _main;  \
++    _MD_GET_SP(_thread) = (_MD_SP_TYPE) ((_sp) - 64); \
++    _thread->md.sp = _MD_GET_SP_PTR(_thread); \
++    _thread->md.fp = _MD_GET_FP_PTR(_thread); \
++    _MD_SET_FP(_thread, 0); \
++}
++
++#else
++
++#define _MD_INIT_CONTEXT(_thread, _sp, _main, status)  \
++{  \
++    *status = PR_TRUE;  \
++    if (sigsetjmp(CONTEXT(_thread), 1)) {  \
++        _main();  \
++    }  \
++    _MD_GET_SP(_thread) = (_MD_SP_TYPE) ((_sp) - 64); \
++	_thread->md.sp = _MD_GET_SP_PTR(_thread); \
++	_thread->md.fp = _MD_GET_FP_PTR(_thread); \
++    _MD_SET_FP(_thread, 0); \
++}
++
++#endif /*__powerpc__*/
++
++#define _MD_SWITCH_CONTEXT(_thread)  \
++    if (!sigsetjmp(CONTEXT(_thread), 1)) {  \
++	(_thread)->md.errcode = errno;  \
++	_PR_Schedule();  \
++    }
++
++/*
++** Restore a thread context, saved by _MD_SWITCH_CONTEXT
++*/
++#define _MD_RESTORE_CONTEXT(_thread) \
++{   \
++    errno = (_thread)->md.errcode;  \
++    _MD_SET_CURRENT_THREAD(_thread);  \
++    siglongjmp(CONTEXT(_thread), 1);  \
++}
++
++/* Machine-dependent (MD) data structures */
++
++struct _MDThread {
++    PR_CONTEXT_TYPE context;
++	void *sp;
++	void *fp;
++    int id;
++    int errcode;
++};
++
++struct _MDThreadStack {
++    PRInt8 notused;
++};
++
++struct _MDLock {
++    PRInt8 notused;
++};
++
++struct _MDSemaphore {
++    PRInt8 notused;
++};
++
++struct _MDCVar {
++    PRInt8 notused;
++};
++
++struct _MDSegment {
++    PRInt8 notused;
++};
++
++/*
++ * md-specific cpu structure field
++ */
++#include <sys/time.h>  /* for FD_SETSIZE */
++#define _PR_MD_MAX_OSFD FD_SETSIZE
++
++struct _MDCPU_Unix {
++    PRCList ioQ;
++    PRUint32 ioq_timeout;
++    PRInt32 ioq_max_osfd;
++    PRInt32 ioq_osfd_cnt;
++#ifndef _PR_USE_POLL
++    fd_set fd_read_set, fd_write_set, fd_exception_set;
++    PRInt16 fd_read_cnt[_PR_MD_MAX_OSFD],fd_write_cnt[_PR_MD_MAX_OSFD],
++				fd_exception_cnt[_PR_MD_MAX_OSFD];
++#else
++	struct pollfd *ioq_pollfds;
++	int ioq_pollfds_size;
++#endif	/* _PR_USE_POLL */
++};
++
++#define _PR_IOQ(_cpu)			((_cpu)->md.md_unix.ioQ)
++#define _PR_ADD_TO_IOQ(_pq, _cpu) PR_APPEND_LINK(&_pq.links, &_PR_IOQ(_cpu))
++#define _PR_FD_READ_SET(_cpu)		((_cpu)->md.md_unix.fd_read_set)
++#define _PR_FD_READ_CNT(_cpu)		((_cpu)->md.md_unix.fd_read_cnt)
++#define _PR_FD_WRITE_SET(_cpu)		((_cpu)->md.md_unix.fd_write_set)
++#define _PR_FD_WRITE_CNT(_cpu)		((_cpu)->md.md_unix.fd_write_cnt)
++#define _PR_FD_EXCEPTION_SET(_cpu)	((_cpu)->md.md_unix.fd_exception_set)
++#define _PR_FD_EXCEPTION_CNT(_cpu)	((_cpu)->md.md_unix.fd_exception_cnt)
++#define _PR_IOQ_TIMEOUT(_cpu)		((_cpu)->md.md_unix.ioq_timeout)
++#define _PR_IOQ_MAX_OSFD(_cpu)		((_cpu)->md.md_unix.ioq_max_osfd)
++#define _PR_IOQ_OSFD_CNT(_cpu)		((_cpu)->md.md_unix.ioq_osfd_cnt)
++#define _PR_IOQ_POLLFDS(_cpu)		((_cpu)->md.md_unix.ioq_pollfds)
++#define _PR_IOQ_POLLFDS_SIZE(_cpu)	((_cpu)->md.md_unix.ioq_pollfds_size)
++
++#define _PR_IOQ_MIN_POLLFDS_SIZE(_cpu)	32
++
++struct _MDCPU {
++	struct _MDCPU_Unix md_unix;
++};
++
++#define _MD_INIT_LOCKS()
++#define _MD_NEW_LOCK(lock) PR_SUCCESS
++#define _MD_FREE_LOCK(lock)
++#define _MD_LOCK(lock)
++#define _MD_UNLOCK(lock)
++#define _MD_INIT_IO()
++#define _MD_IOQ_LOCK()
++#define _MD_IOQ_UNLOCK()
++
++extern PRStatus _MD_InitializeThread(PRThread *thread);
++
++#define _MD_INIT_RUNNING_CPU(cpu)       _MD_unix_init_running_cpu(cpu)
++#define _MD_INIT_THREAD                 _MD_InitializeThread
++#define _MD_EXIT_THREAD(thread)
++#define _MD_SUSPEND_THREAD(thread)      _MD_suspend_thread
++#define _MD_RESUME_THREAD(thread)       _MD_resume_thread
++#define _MD_CLEAN_THREAD(_thread)
++
++extern PRStatus _MD_CREATE_THREAD(
++    PRThread *thread,
++    void (*start) (void *),
++    PRThreadPriority priority,
++    PRThreadScope scope,
++    PRThreadState state,
++    PRUint32 stackSize);
++extern void _MD_SET_PRIORITY(struct _MDThread *thread, PRUintn newPri);
++extern PRStatus _MD_WAIT(PRThread *, PRIntervalTime timeout);
++extern PRStatus _MD_WAKEUP_WAITER(PRThread *);
++extern void _MD_YIELD(void);
++
++#endif /* ! _PR_PTHREADS */
++
++extern void _MD_EarlyInit(void);
++extern PRIntervalTime _PR_UNIX_GetInterval(void);
++extern PRIntervalTime _PR_UNIX_TicksPerSecond(void);
++
++#define _MD_EARLY_INIT                  _MD_EarlyInit
++#define _MD_FINAL_INIT					_PR_UnixInit
++#define _MD_GET_INTERVAL                _PR_UNIX_GetInterval
++#define _MD_INTERVAL_PER_SEC            _PR_UNIX_TicksPerSecond
++
++/*
++ * We wrapped the select() call.  _MD_SELECT refers to the built-in,
++ * unwrapped version.
++ */
++#define _MD_SELECT __select
++
++#ifdef _PR_POLL_AVAILABLE
++#include <sys/poll.h>
++extern int __syscall_poll(struct pollfd *ufds, unsigned long int nfds,
++	int timeout);
++#define _MD_POLL __syscall_poll
++#endif
++
++/* For writev() */
++//#include <sys/uio.h>
++
++//extern void _MD_linux_map_sendfile_error(int err);
++
++#endif /* nspr_cygwin_defs_h___ */
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_pth.h src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_pth.h
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_pth.h	2007-10-31 12:36:57.000000000 -0500
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_pth.h	2008-05-02 13:55:59.218750000 -0500
+@@ -146,7 +146,7 @@
+ 	|| defined(HPUX) || defined(LINUX) || defined(FREEBSD) \
+ 	|| defined(NETBSD) || defined(OPENBSD) || defined(BSDI) \
+ 	|| defined(VMS) || defined(NTO) || defined(DARWIN) \
+-	|| defined(UNIXWARE) || defined(RISCOS)
++	|| defined(UNIXWARE) || defined(RISCOS) || defined(CYGWIN)
+ #define _PT_PTHREAD_INVALIDATE_THR_HANDLE(t)  (t) = 0
+ #define _PT_PTHREAD_THR_HANDLE_IS_INVALID(t)  (t) == 0
+ #define _PT_PTHREAD_COPY_THR_HANDLE(st, dt)   (dt) = (st)
+@@ -198,7 +198,7 @@
+ #if (defined(AIX) && !defined(AIX4_3_PLUS)) || defined(LINUX) \
+ 	|| defined(FREEBSD) || defined(NETBSD) || defined(OPENBSD) \
+ 	|| defined(BSDI) || defined(VMS) || defined(UNIXWARE) \
+-	|| defined(DARWIN)
++	|| defined(DARWIN) || defined(CYGWIN)
+ #define PT_NO_SIGTIMEDWAIT
+ #endif
+ 
+@@ -253,7 +253,7 @@
+ #define PT_PRIO_MAX            31
+ #elif defined(NETBSD) \
+ 	|| defined(BSDI) || defined(DARWIN) || defined(UNIXWARE) \
+-	|| defined(RISCOS) /* XXX */
++	|| defined(RISCOS) || defined(CYGWIN) /* XXX */
+ #define PT_PRIO_MIN            0
+ #define PT_PRIO_MAX            126
+ #else
+@@ -287,7 +287,7 @@
+ #elif defined(HPUX) || defined(LINUX) || defined(SOLARIS) \
+ 	|| defined(FREEBSD) || defined(NETBSD) || defined(OPENBSD) \
+ 	|| defined(BSDI) || defined(NTO) || defined(DARWIN) \
+-	|| defined(UNIXWARE) || defined(RISCOS)
++	|| defined(UNIXWARE) || defined(RISCOS) || defined(CYGWIN)
+ #define _PT_PTHREAD_YIELD()            	sched_yield()
+ #else
+ #error "Need to define _PT_PTHREAD_YIELD for this platform"
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/prosdep.h src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/prosdep.h
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/prosdep.h	2005-07-01 17:26:35.000000000 -0500
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/prosdep.h	2008-05-02 13:55:59.234375000 -0500
+@@ -72,6 +72,9 @@
+ #if defined(AIX)
+ #include "md/_aix.h"
+ 
++#elif defined(CYGWIN)
++#include "md/_cygwin.h"
++
+ #elif defined(FREEBSD)
+ #include "md/_freebsd.h"
+ 
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/prvrsion.h src/nspr-4.6.8/mozilla/nsprpub/pr/include/prvrsion.h
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/prvrsion.h	2004-04-25 10:00:47.000000000 -0500
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/include/prvrsion.h	2008-05-02 13:55:59.265625000 -0500
+@@ -106,7 +106,7 @@
+  *       return &prVersionDescription_libfoo;
+  *   }
+  */
+-typedef const PRVersionDescription *(*versionEntryPointType)(void);
++typedef PRVersionDescription *(*versionEntryPointType)(void);
+ 
+ /* 
+  * Where you declare your libVersionPoint, do it like this: 
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/Makefile.in src/nspr-4.6.8/mozilla/nsprpub/pr/src/Makefile.in
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/Makefile.in	2006-10-18 19:39:28.000000000 -0500
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/Makefile.in	2008-05-02 13:55:59.281250000 -0500
+@@ -320,6 +320,10 @@
+ RESNAME=nspr.rc
+ endif # WINNT
+ 
++ifeq ($(OS_ARCH), CYGWIN)
++DLLBASE=-Wl,--image-base -Wl,0x30000000
++endif # CYGWIN
++
+ include $(srcdir)/md/$(PR_MD_ARCH_DIR)/objs.mk
+ ifdef USE_BTHREADS
+ include $(srcdir)/bthreads/objs.mk
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/cygwin.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/cygwin.c
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/cygwin.c	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/cygwin.c	2008-05-02 13:55:59.296875000 -0500
+@@ -0,0 +1,123 @@
++/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* ***** BEGIN LICENSE BLOCK *****
++ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
++ *
++ * The contents of this file are subject to the Mozilla Public License Version
++ * 1.1 (the "License"); you may not use this file except in compliance with
++ * the License. You may obtain a copy of the License at
++ * http://www.mozilla.org/MPL/
++ *
++ * Software distributed under the License is distributed on an "AS IS" basis,
++ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
++ * for the specific language governing rights and limitations under the
++ * License.
++ *
++ * The Original Code is the Netscape Portable Runtime (NSPR).
++ *
++ * The Initial Developer of the Original Code is
++ * Netscape Communications Corporation.
++ * Portions created by the Initial Developer are Copyright (C) 1998-2000
++ * the Initial Developer. All Rights Reserved.
++ *
++ * Contributor(s):
++ *
++ * Alternatively, the contents of this file may be used under the terms of
++ * either the GNU General Public License Version 2 or later (the "GPL"), or
++ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
++ * in which case the provisions of the GPL or the LGPL are applicable instead
++ * of those above. If you wish to allow use of your version of this file only
++ * under the terms of either the GPL or the LGPL, and not to allow others to
++ * use your version of this file under the terms of the MPL, indicate your
++ * decision by deleting the provisions above and replace them with the notice
++ * and other provisions required by the GPL or the LGPL. If you do not delete
++ * the provisions above, a recipient may use your version of this file under
++ * the terms of any one of the MPL, the GPL or the LGPL.
++ *
++ * ***** END LICENSE BLOCK ***** */
++
++#include "primpl.h"
++
++void _MD_EarlyInit(void)
++{
++}
++
++PRWord *_MD_HomeGCRegisters(PRThread *t, int isCurrent, int *np)
++{
++#ifndef _PR_PTHREADS
++    if (isCurrent) {
++	(void) setjmp(CONTEXT(t));
++    }
++    *np = sizeof(CONTEXT(t)) / sizeof(PRWord);
++    return (PRWord *) CONTEXT(t);
++#else
++	*np = 0;
++	return NULL;
++#endif
++}
++
++#ifdef _PR_PTHREADS
++
++extern void _MD_unix_terminate_waitpid_daemon(void);
++
++void _MD_CleanupBeforeExit(void)
++{
++    _MD_unix_terminate_waitpid_daemon();
++}
++
++#else /* ! _PR_PTHREADS */
++
++void
++_MD_SET_PRIORITY(_MDThread *thread, PRUintn newPri)
++{
++    return;
++}
++
++PRStatus
++_MD_InitializeThread(PRThread *thread)
++{
++	/*
++	 * set the pointers to the stack-pointer and frame-pointer words in the
++	 * context structure; this is for debugging use.
++	 */
++	thread->md.sp = _MD_GET_SP_PTR(thread);
++	thread->md.fp = _MD_GET_FP_PTR(thread);
++	return PR_SUCCESS;
++}
++
++PRStatus
++_MD_WAIT(PRThread *thread, PRIntervalTime ticks)
++{
++    PR_ASSERT(!(thread->flags & _PR_GLOBAL_SCOPE));
++    _PR_MD_SWITCH_CONTEXT(thread);
++    return PR_SUCCESS;
++}
++
++PRStatus
++_MD_WAKEUP_WAITER(PRThread *thread)
++{
++    if (thread) {
++	PR_ASSERT(!(thread->flags & _PR_GLOBAL_SCOPE));
++    }
++    return PR_SUCCESS;
++}
++
++/* These functions should not be called for Linux */
++void
++_MD_YIELD(void)
++{
++    PR_NOT_REACHED("_MD_YIELD should not be called for Linux.");
++}
++
++PRStatus
++_MD_CREATE_THREAD(
++    PRThread *thread,
++    void (*start) (void *),
++    PRThreadPriority priority,
++    PRThreadScope scope,
++    PRThreadState state,
++    PRUint32 stackSize)
++{
++    PR_NOT_REACHED("_MD_CREATE_THREAD should not be called for Linux.");
++	return PR_FAILURE;
++}
++#endif /* ! _PR_PTHREADS */
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	2008-05-02 13:55:59.312500000 -0500
+@@ -0,0 +1,120 @@
++/ -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*-
++/ 
++/ The contents of this file are subject to the Mozilla Public
++/ License Version 1.1 (the "License"); you may not use this file
++/ except in compliance with the License. You may obtain a copy of
++/ the License at http://www.mozilla.org/MPL/
++/ 
++/ Software distributed under the License is distributed on an "AS
++/ IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
++/ implied. See the License for the specific language governing
++/ rights and limitations under the License.
++/ 
++/ The Original Code is the Netscape Portable Runtime (NSPR).
++/ 
++/ The Initial Developer of the Original Code is Netscape
++/ Communications Corporation.  Portions created by Netscape are 
++/ Copyright (C) 2000 Netscape Communications Corporation.  All
++/ Rights Reserved.
++/ 
++/ Contributor(s):
++/ 
++/ Alternatively, the contents of this file may be used under the
++/ terms of the GNU General Public License Version 2 or later (the
++/ "GPL"), in which case the provisions of the GPL are applicable 
++/ instead of those above.  If you wish to allow use of your 
++/ version of this file only under the terms of the GPL and not to
++/ allow others to use your version of this file under the MPL,
++/ indicate your decision by deleting the provisions above and
++/ replace them with the notice and other provisions required by
++/ the GPL.  If you do not delete the provisions above, a recipient
++/ may use your version of this file under either the MPL or the
++/ GPL.
++/ 
++
++/ PRInt32 _PR_x86_AtomicIncrement(PRInt32 *val)
++/
++/ Atomically increment the integer pointed to by 'val' and return
++/ the result of the increment.
++/
++    .text
++    .globl _PR_x86_AtomicIncrement
++    .globl __PR_x86_AtomicIncrement
++    .align 4
++_PR_x86_AtomicIncrement:
++__PR_x86_AtomicIncrement:
++    movl 4(%esp), %ecx
++    movl $1, %eax
++    lock
++    xaddl %eax, (%ecx)
++    incl %eax
++    ret
++
++/ PRInt32 _PR_x86_AtomicDecrement(PRInt32 *val)
++/
++/ Atomically decrement the integer pointed to by 'val' and return
++/ the result of the decrement.
++/
++    .text
++    .globl _PR_x86_AtomicDecrement
++    .globl __PR_x86_AtomicDecrement
++    .align 4
++_PR_x86_AtomicDecrement:
++__PR_x86_AtomicDecrement:
++    movl 4(%esp), %ecx
++    movl $-1, %eax
++    lock
++    xaddl %eax, (%ecx)
++    decl %eax
++    ret
++
++/ PRInt32 _PR_x86_AtomicSet(PRInt32 *val, PRInt32 newval)
++/
++/ Atomically set the integer pointed to by 'val' to the new
++/ value 'newval' and return the old value.
++/
++/ An alternative implementation:
++/   .text
++/   .globl _PR_x86_AtomicSet
++/   .align 4
++/_PR_x86_AtomicSet:
++/   movl 4(%esp), %ecx
++/   movl 8(%esp), %edx
++/   movl (%ecx), %eax
++/retry:
++/   lock
++/   cmpxchgl %edx, (%ecx)
++/   jne retry
++/   ret
++/
++    .text
++    .globl _PR_x86_AtomicSet
++    .globl __PR_x86_AtomicSet
++    .align 4
++_PR_x86_AtomicSet:
++__PR_x86_AtomicSet:
++    movl 4(%esp), %ecx
++    movl 8(%esp), %eax
++    lock
++    xchgl %eax, (%ecx)
++    ret
++
++/ PRInt32 _PR_x86_AtomicAdd(PRInt32 *ptr, PRInt32 val)
++/
++/ Atomically add 'val' to the integer pointed to by 'ptr'
++/ and return the result of the addition.
++/
++    .text
++    .globl _PR_x86_AtomicAdd
++    .globl __PR_x86_AtomicAdd
++    .align 4
++_PR_x86_AtomicAdd:
++__PR_x86_AtomicAdd:
++    movl 4(%esp), %ecx
++    movl 8(%esp), %eax
++    movl %eax, %edx
++    lock
++    xaddl %eax, (%ecx)
++    addl %edx, %eax
++    ret
++
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/unix.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/unix.c
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/unix.c	2006-02-07 13:29:04.000000000 -0600
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/unix.c	2008-05-02 13:55:59.328125000 -0500
+@@ -68,6 +68,7 @@
+  * PRInt32* pointer to a _PRSockLen_t* pointer.
+  */
+ #if defined(HAVE_SOCKLEN_T) \
++	|| defined(CYGWIN) \
+     || (defined(LINUX) && defined(__GLIBC__) && __GLIBC__ >= 2)
+ #define _PRSockLen_t socklen_t
+ #elif defined(IRIX) || defined(HPUX) || defined(OSF1) || defined(SOLARIS) \
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxproces.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxproces.c
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxproces.c	2005-04-29 16:02:54.000000000 -0500
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxproces.c	2008-05-02 13:55:59.343750000 -0500
+@@ -92,7 +92,7 @@
+  * that can share the virtual address space and file descriptors.
+  */
+ #if (defined(IRIX) && !defined(_PR_PTHREADS)) \
+-        || (defined(LINUX) && defined(_PR_PTHREADS))
++        || (defined(LINUX) && defined(_PR_PTHREADS)) || defined(CYGWIN)
+ #define _PR_SHARE_CLONES
+ #endif
+ 
+@@ -105,8 +105,8 @@
+  * also not necessary.
+  */
+ 
+-#if defined(_PR_GLOBAL_THREADS_ONLY) \
+-	|| (defined(_PR_PTHREADS) && !defined(LINUX))
++#if (defined(_PR_GLOBAL_THREADS_ONLY) \
++	|| (defined(_PR_PTHREADS) && !defined(LINUX))) && !defined(CYGWIN)
+ #define _PR_NATIVE_THREADS
+ #endif
+ 
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxrng.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxrng.c
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2005-07-01 17:26:36.000000000 -0500
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2008-05-02 13:55:59.375000000 -0500
+@@ -138,7 +138,7 @@
+     return 0;
+ }
+ 
+-#elif (defined(LINUX) || defined(FREEBSD) || defined(NETBSD) || defined(OPENBSD))
++#elif (defined(LINUX) || defined(FREEBSD) || defined(NETBSD) || defined(OPENBSD)) || defined(CYGWIN)
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptio.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptio.c
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptio.c	2007-08-28 20:29:59.000000000 -0500
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptio.c	2008-05-02 13:55:59.390625000 -0500
+@@ -208,7 +208,7 @@
+     || defined(HPUX10_30) || defined(HPUX11) || defined(LINUX) \
+     || defined(FREEBSD) || defined(NETBSD) || defined(OPENBSD) \
+     || defined(BSDI) || defined(VMS) || defined(NTO) || defined(DARWIN) \
+-    || defined(UNIXWARE) || defined(RISCOS)
++    || defined(UNIXWARE) || defined(RISCOS) || defined(CYGWIN)
+ #define _PRSelectFdSetArg_t fd_set *
+ #else
+ #error "Cannot determine architecture"
+@@ -3249,7 +3249,7 @@
+ #if defined(HPUX) || defined(OSF1) || defined(SOLARIS) || defined (IRIX) \
+     || defined(AIX) || defined(LINUX) || defined(FREEBSD) || defined(NETBSD) \
+     || defined(OPENBSD) || defined(BSDI) || defined(VMS) || defined(NTO) \
+-    || defined(DARWIN) || defined(UNIXWARE) || defined(RISCOS)
++    || defined(DARWIN) || defined(UNIXWARE) || defined(RISCOS) || defined(CYGWIN)
+ #define _PR_FCNTL_FLAGS O_NONBLOCK
+ #else
+ #error "Can't determine architecture"
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptthread.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptthread.c
+--- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptthread.c	2006-11-30 18:34:12.000000000 -0600
++++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptthread.c	2008-05-02 13:55:59.406250000 -0500
+@@ -87,6 +87,13 @@
+      *     Jerry.Kirk@Nexwarecorp.com
+      */
+     return 10;
++#elif defined __CYGWIN__
++    /* This priority algorithm causes lots of problems on Cygwin
++     * for now I have just hard coded everything to run at priority 15
++     * until I can come up with a new algorithm.
++     *     gerrit@familiehaase.de
++     */
++    return 15;
+ #else
+     return pt_book.minPrio +
+ 	    pri * (pt_book.maxPrio - pt_book.minPrio) / PR_PRIORITY_LAST;
