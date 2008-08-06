@@ -1,4 +1,3 @@
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/config/nspr.pc.in src/nspr-4.6.8/mozilla/nsprpub/config/nspr.pc.in
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/config/nspr.pc.in	1969-12-31 18:00:00.000000000 -0600
 +++ src/nspr-4.6.8/mozilla/nsprpub/config/nspr.pc.in	2008-05-02 13:55:59.140625000 -0500
 @@ -0,0 +1,11 @@
@@ -13,7 +12,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
 +Libs: -L${libdir} -lplds4 -lplc4 -lnspr4 @OS_LIBS@
 +Cflags: -I${includedir}
 +
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/config/rules.mk src/nspr-4.6.8/mozilla/nsprpub/config/rules.mk
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/config/rules.mk	2006-02-22 16:53:55.000000000 -0600
 +++ src/nspr-4.6.8/mozilla/nsprpub/config/rules.mk	2008-05-02 13:55:59.156250000 -0500
 @@ -104,7 +104,7 @@
@@ -45,7 +43,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
  TARGETS		= $(LIBRARY) $(SHARED_LIBRARY) $(IMPORT_LIBRARY)
  ifndef BUILD_OPT
  ifdef MSC_VER
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/configure.in src/nspr-4.6.8/mozilla/nsprpub/configure.in
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/configure.in	2007-10-31 13:07:38.000000000 -0500
 +++ src/nspr-4.6.8/mozilla/nsprpub/configure.in	2008-05-02 13:55:59.171875000 -0500
 @@ -94,7 +94,7 @@
@@ -150,7 +147,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
  lib/Makefile 
  lib/ds/Makefile 
  lib/libc/Makefile 
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.cfg src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.cfg
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.cfg	1969-12-31 18:00:00.000000000 -0600
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.cfg	2008-05-02 13:55:59.187500000 -0500
 @@ -0,0 +1,196 @@
@@ -350,7 +346,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
 +#endif /* NO_NSPR_10_SUPPORT */
 +
 +#endif /* nspr_cpucfg___ */
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.h src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.h
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.h	1969-12-31 18:00:00.000000000 -0600
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_cygwin.h	2008-05-02 13:55:59.218750000 -0500
 @@ -0,0 +1,501 @@
@@ -855,7 +850,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
 +//extern void _MD_linux_map_sendfile_error(int err);
 +
 +#endif /* nspr_cygwin_defs_h___ */
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_pth.h src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_pth.h
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_pth.h	2007-10-31 12:36:57.000000000 -0500
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/_pth.h	2008-05-02 13:55:59.218750000 -0500
 @@ -146,7 +146,7 @@
@@ -894,7 +888,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
  #define _PT_PTHREAD_YIELD()            	sched_yield()
  #else
  #error "Need to define _PT_PTHREAD_YIELD for this platform"
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/prosdep.h src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/prosdep.h
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/md/prosdep.h	2005-07-01 17:26:35.000000000 -0500
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/include/md/prosdep.h	2008-05-02 13:55:59.234375000 -0500
 @@ -72,6 +72,9 @@
@@ -907,7 +900,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
  #elif defined(FREEBSD)
  #include "md/_freebsd.h"
  
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/prvrsion.h src/nspr-4.6.8/mozilla/nsprpub/pr/include/prvrsion.h
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/include/prvrsion.h	2004-04-25 10:00:47.000000000 -0500
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/include/prvrsion.h	2008-05-02 13:55:59.265625000 -0500
 @@ -106,7 +106,7 @@
@@ -919,7 +911,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
  
  /* 
   * Where you declare your libVersionPoint, do it like this: 
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/Makefile.in src/nspr-4.6.8/mozilla/nsprpub/pr/src/Makefile.in
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/Makefile.in	2006-10-18 19:39:28.000000000 -0500
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/Makefile.in	2008-05-02 13:55:59.281250000 -0500
 @@ -320,6 +320,10 @@
@@ -933,7 +924,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
  include $(srcdir)/md/$(PR_MD_ARCH_DIR)/objs.mk
  ifdef USE_BTHREADS
  include $(srcdir)/bthreads/objs.mk
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/cygwin.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/cygwin.c
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/cygwin.c	1969-12-31 18:00:00.000000000 -0600
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/cygwin.c	2008-05-02 13:55:59.296875000 -0500
 @@ -0,0 +1,123 @@
@@ -1060,7 +1050,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
 +	return PR_FAILURE;
 +}
 +#endif /* ! _PR_PTHREADS */
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	1969-12-31 18:00:00.000000000 -0600
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	2008-05-02 13:55:59.312500000 -0500
 @@ -0,0 +1,120 @@
@@ -1184,7 +1173,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
 +    addl %edx, %eax
 +    ret
 +
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/unix.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/unix.c
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/unix.c	2006-02-07 13:29:04.000000000 -0600
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/unix.c	2008-05-02 13:55:59.328125000 -0500
 @@ -68,6 +68,7 @@
@@ -1195,7 +1183,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
      || (defined(LINUX) && defined(__GLIBC__) && __GLIBC__ >= 2)
  #define _PRSockLen_t socklen_t
  #elif defined(IRIX) || defined(HPUX) || defined(OSF1) || defined(SOLARIS) \
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxproces.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxproces.c
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxproces.c	2005-04-29 16:02:54.000000000 -0500
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxproces.c	2008-05-02 13:55:59.343750000 -0500
 @@ -92,7 +92,7 @@
@@ -1218,7 +1205,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
  #define _PR_NATIVE_THREADS
  #endif
  
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxrng.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxrng.c
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2005-07-01 17:26:36.000000000 -0500
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2008-05-02 13:55:59.375000000 -0500
 @@ -138,7 +138,7 @@
@@ -1230,7 +1216,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
  #include <sys/types.h>
  #include <sys/stat.h>
  #include <fcntl.h>
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptio.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptio.c
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptio.c	2007-08-28 20:29:59.000000000 -0500
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptio.c	2008-05-02 13:55:59.390625000 -0500
 @@ -208,7 +208,7 @@
@@ -1251,7 +1236,6 @@ diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -
  #define _PR_FCNTL_FLAGS O_NONBLOCK
  #else
  #error "Can't determine architecture"
-diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x autom4te.cache -x config.cache -x config.log -x config.status -x config.h -x config.h.in -x ABOUT-NLS -x Makefile.in.in -x Makevars.template -x '*SlackBuild*' -x '*.egg-info' -x '*.class' -x '*.pyc' -x '*.mo' -x '*.gmo' -x '*.orig' -x '*.rej' -x '*.spec' -x '*.temp' -x '*~' -x '*.stackdump' -x COPYING -x INSTALL -x compile -x config-ml.in -x config.guess -x config.sub -x depcomp -x elisp-comp -x install-sh -x libtool.m4 -x ltoptions.m4 -x ltsugar.m4 -x ltversion.m4 -x 'lt~obsolete.m4' -x ltmain.sh -x mdate-sh -x missing -x mkinstalldirs -x py-compile -x symlink-tree -x texinfo.tex -x ylwrap -x config.rpath -x omf.make -x xmldocs.make -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x intltool-extract -x intltool-extract.in -x intltool-merge -x intltool-merge.in -x intltool-update -x intltool-update.in -x configure origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptthread.c src/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptthread.c
 --- origsrc/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptthread.c	2006-11-30 18:34:12.000000000 -0600
 +++ src/nspr-4.6.8/mozilla/nsprpub/pr/src/pthreads/ptthread.c	2008-05-02 13:55:59.406250000 -0500
 @@ -87,6 +87,13 @@
