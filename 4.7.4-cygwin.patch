@@ -1,6 +1,6 @@
---- origsrc/nspr-4.7.3/mozilla/nsprpub/config/rules.mk	2008-05-02 03:18:04.000000000 -0500
-+++ src/nspr-4.7.3/mozilla/nsprpub/config/rules.mk	2008-12-31 20:40:23.253125000 -0600
-@@ -106,7 +106,7 @@
+--- origsrc/nspr-4.7.4/mozilla/nsprpub/config/rules.mk	2009-03-24 17:49:17.000000000 -0500
++++ src/nspr-4.7.4/mozilla/nsprpub/config/rules.mk	2009-04-12 12:51:22.511242000 -0500
+@@ -106,7 +106,7 @@ endif
  #
  
  ifdef LIBRARY_NAME
@@ -9,7 +9,7 @@
  
  #
  # Win95, Win16, and OS/2 require library names conforming to the 8.3 rule.
-@@ -119,8 +119,8 @@
+@@ -119,8 +119,8 @@ IMPORT_LIBRARY	= $(OBJDIR)/$(LIBRARY_NAM
  SHARED_LIB_PDB	= $(OBJDIR)/$(LIBRARY_NAME)$(LIBRARY_VERSION).pdb
  else
  LIBRARY		= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION)_s.$(LIB_SUFFIX)
@@ -20,7 +20,7 @@
  SHARED_LIB_PDB	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).pdb
  endif
  
-@@ -139,7 +139,7 @@
+@@ -139,7 +139,7 @@ endif
  endif
  
  ifndef TARGETS
@@ -29,9 +29,9 @@
  TARGETS		= $(LIBRARY) $(SHARED_LIBRARY) $(IMPORT_LIBRARY)
  ifndef BUILD_OPT
  ifdef MSC_VER
---- origsrc/nspr-4.7.3/mozilla/nsprpub/configure.in	2008-11-04 12:07:15.000000000 -0600
-+++ src/nspr-4.7.3/mozilla/nsprpub/configure.in	2008-12-31 21:06:34.300000000 -0600
-@@ -97,7 +97,7 @@
+--- origsrc/nspr-4.7.4/mozilla/nsprpub/configure.in	2008-12-04 18:46:50.000000000 -0600
++++ src/nspr-4.7.4/mozilla/nsprpub/configure.in	2009-04-12 12:51:22.526867000 -0500
+@@ -97,7 +97,7 @@ HOST_CFLAGS="${HOST_CFLAGS=}"
  HOST_LDFLAGS="${HOST_LDFLAGS=}"
  
  case "$target" in
@@ -40,7 +40,7 @@
      # Check to see if we are really running in a msvc environemnt
      _WIN32_MSVC=
      AC_CHECK_PROGS(CC, cl)
-@@ -763,10 +763,23 @@
+@@ -763,10 +763,23 @@ Windows_NT)
          CPU_ARCH=x86
      fi
      ;;
@@ -65,7 +65,7 @@
  # If uname -s returns MINGW32_NT-5.1, we assume that we are using
  # the uname.exe in the MSYS tools.
  #
-@@ -817,7 +830,7 @@
+@@ -817,7 +830,7 @@ case "$host" in
  *-mingw*)
      NSINSTALL=nsinstall
      ;;
@@ -74,7 +74,7 @@
      NSINSTALL='$(CYGWIN_WRAPPER) nsinstall'
      if test `echo "${PATH}" | grep -c \;` = 0; then
          CYGWIN_WRAPPER='sh $(topsrcdir)/build/cygwin-wrapper'
-@@ -992,6 +1005,32 @@
+@@ -992,6 +1005,32 @@ case "$target" in
  
      ;;
  
@@ -107,7 +107,7 @@
  *-darwin*)
      AC_DEFINE(XP_UNIX)
      AC_DEFINE(DARWIN)
-@@ -1503,7 +1542,7 @@
+@@ -1503,7 +1542,7 @@ tools are selected during the Xcode/Deve
      esac    
      ;;
  
@@ -116,7 +116,7 @@
      AC_DEFINE(XP_PC)
      AC_DEFINE(WIN32)
      PR_MD_ARCH_DIR=windows
-@@ -2594,7 +2633,7 @@
+@@ -2610,7 +2649,7 @@ case "$target" in
          AC_DEFINE(_PR_LOCAL_THREADS_ONLY)
      fi
      ;;
@@ -125,8 +125,8 @@
      dnl win32, os2 & beos cannot use pthreads
      USE_PTHREADS=
      _PTHREAD_LDFLAGS=
---- origsrc/nspr-4.7.3/mozilla/nsprpub/pr/include/md/_cygwin.cfg	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.7.3/mozilla/nsprpub/pr/include/md/_cygwin.cfg	2008-12-31 20:25:54.893750000 -0600
+--- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_cygwin.cfg	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_cygwin.cfg	2009-04-12 12:51:22.542492000 -0500
 @@ -0,0 +1,149 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -277,8 +277,8 @@
 +#endif /* NO_NSPR_10_SUPPORT */
 +
 +#endif /* nspr_cpucfg___ */
---- origsrc/nspr-4.7.3/mozilla/nsprpub/pr/include/md/_cygwin.h	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.7.3/mozilla/nsprpub/pr/include/md/_cygwin.h	2008-12-31 21:16:35.628125000 -0600
+--- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_cygwin.h	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_cygwin.h	2009-04-12 12:51:22.558117000 -0500
 @@ -0,0 +1,280 @@
 +/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -560,8 +560,8 @@
 +#include <sys/uio.h>
 +
 +#endif /* nspr_cygwin_defs_h___ */
---- origsrc/nspr-4.7.3/mozilla/nsprpub/pr/include/md/_pth.h	2008-07-26 12:49:39.000000000 -0500
-+++ src/nspr-4.7.3/mozilla/nsprpub/pr/include/md/_pth.h	2008-12-31 19:44:46.112500000 -0600
+--- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_pth.h	2008-07-26 12:49:39.000000000 -0500
++++ src/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_pth.h	2009-04-12 12:51:22.558117000 -0500
 @@ -147,7 +147,8 @@
  	|| defined(HPUX) || defined(FREEBSD) \
  	|| defined(NETBSD) || defined(OPENBSD) || defined(BSDI) \
@@ -590,7 +590,7 @@
  #define PT_PRIO_MIN            sched_get_priority_min(SCHED_OTHER)
  #define PT_PRIO_MAX            sched_get_priority_max(SCHED_OTHER)
  #elif defined(NTO)
-@@ -295,7 +296,8 @@
+@@ -295,7 +296,8 @@ extern int (*_PT_aix_yield_fcn)();
  	|| defined(LINUX) || defined(__GNU__) || defined(__GLIBC__) \
  	|| defined(FREEBSD) || defined(NETBSD) || defined(OPENBSD) \
  	|| defined(BSDI) || defined(NTO) || defined(DARWIN) \
@@ -600,9 +600,9 @@
  #define _PT_PTHREAD_YIELD()            	sched_yield()
  #else
  #error "Need to define _PT_PTHREAD_YIELD for this platform"
---- origsrc/nspr-4.7.3/mozilla/nsprpub/pr/include/md/prosdep.h	2008-07-26 12:49:39.000000000 -0500
-+++ src/nspr-4.7.3/mozilla/nsprpub/pr/include/md/prosdep.h	2008-12-31 20:40:23.409375000 -0600
-@@ -72,6 +72,9 @@
+--- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/include/md/prosdep.h	2008-07-26 12:49:39.000000000 -0500
++++ src/nspr-4.7.4/mozilla/nsprpub/pr/include/md/prosdep.h	2009-04-12 12:51:22.573742000 -0500
+@@ -72,6 +72,9 @@ PR_BEGIN_EXTERN_C
  #if defined(AIX)
  #include "md/_aix.h"
  
@@ -612,8 +612,8 @@
  #elif defined(FREEBSD)
  #include "md/_freebsd.h"
  
---- origsrc/nspr-4.7.3/mozilla/nsprpub/pr/src/md/unix/cygwin.c	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.7.3/mozilla/nsprpub/pr/src/md/unix/cygwin.c	2008-12-31 21:19:36.284375000 -0600
+--- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/cygwin.c	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/cygwin.c	2009-04-12 12:51:22.573742000 -0500
 @@ -0,0 +1,114 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -729,8 +729,8 @@
 +	return PR_FAILURE;
 +}
 +#endif /* ! _PR_PTHREADS */
---- origsrc/nspr-4.7.3/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.7.3/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	2008-12-31 20:40:23.425000000 -0600
+--- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	2009-04-12 12:51:22.589367000 -0500
 @@ -0,0 +1,120 @@
 +/ -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*-
 +/ 
@@ -852,9 +852,9 @@
 +    addl %edx, %eax
 +    ret
 +
---- origsrc/nspr-4.7.3/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2008-10-07 16:45:09.000000000 -0500
-+++ src/nspr-4.7.3/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2008-12-31 19:51:52.956250000 -0600
-@@ -140,7 +140,7 @@
+--- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2008-10-07 16:45:09.000000000 -0500
++++ src/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2009-04-12 12:51:22.604992000 -0500
+@@ -140,7 +140,7 @@ GetHighResClock(void *buf, size_t maxbyt
  
  #elif (defined(LINUX) || defined(FREEBSD) || defined(__FreeBSD_kernel__) \
      || defined(NETBSD) || defined(__NetBSD_kernel__) || defined(OPENBSD) \
@@ -863,8 +863,8 @@
  #include <sys/types.h>
  #include <sys/stat.h>
  #include <fcntl.h>
---- origsrc/nspr-4.7.3/mozilla/nsprpub/pr/src/pthreads/ptio.c	2008-08-23 12:04:34.000000000 -0500
-+++ src/nspr-4.7.3/mozilla/nsprpub/pr/src/pthreads/ptio.c	2008-12-31 19:59:59.721875000 -0600
+--- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/src/pthreads/ptio.c	2008-08-23 12:04:34.000000000 -0500
++++ src/nspr-4.7.4/mozilla/nsprpub/pr/src/pthreads/ptio.c	2009-04-12 12:51:22.620617000 -0500
 @@ -60,7 +60,7 @@
  #include <sys/uio.h>
  #include <sys/file.h>
@@ -874,7 +874,7 @@
  #include <sys/utsname.h> /* for uname */
  #endif
  #if defined(SOLARIS) || defined(UNIXWARE)
-@@ -212,7 +212,8 @@
+@@ -212,7 +212,8 @@ static PRBool _pr_ipv6_v6only_on_by_defa
      || defined(LINUX) || defined(__GNU__) || defined(__GLIBC__) \
      || defined(FREEBSD) || defined(NETBSD) || defined(OPENBSD) \
      || defined(BSDI) || defined(VMS) || defined(NTO) || defined(DARWIN) \
@@ -884,7 +884,7 @@
  #define _PRSelectFdSetArg_t fd_set *
  #else
  #error "Cannot determine architecture"
-@@ -3272,7 +3273,7 @@
+@@ -3272,7 +3273,7 @@ static PRIOMethods _pr_socketpollfd_meth
      || defined(AIX) || defined(FREEBSD) || defined(NETBSD) \
      || defined(OPENBSD) || defined(BSDI) || defined(VMS) || defined(NTO) \
      || defined(DARWIN) || defined(UNIXWARE) || defined(RISCOS) \

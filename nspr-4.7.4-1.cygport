@@ -1,11 +1,15 @@
 DESCRIPTION="Netscape Portable Runtime"
 HOMEPAGE="http://www.mozilla.org/projects/nspr/"
 SRC_URI="ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${PV}/src/${P}.tar.gz"
-PATCH_URI="mirror://portage/dev-libs/${PN}/files/${PN}-4.7.0-prtime.patch"
+PATCH_URI="mirror://portage/dev-libs/${PN}/files/${PN}-4.6.1-config.patch
+           mirror://portage/dev-libs/${PN}/files/${PN}-4.7.0-prtime.patch
+           4.7.4-cygwin.patch
+           4.7.4-gcc43.patch
+           4.7.4-pkgconfig.patch"
 
 PKG_NAMES="${PN} lib${PN}4 lib${PN}-devel"
-libnspr4_CONTENTS='usr/bin/*-4.dll usr/share/doc/'
-libnspr_devel_CONTENTS="--exclude=*.dll usr/bin/ usr/include/ usr/lib/"
+libnspr4_CONTENTS='usr/bin/*4.dll usr/share/doc/'
+libnspr_devel_CONTENTS="--exclude=*.dll usr/bin/ usr/include/ usr/lib/ usr/share/aclocal/"
 
 DIFF_EXCLUDES='configure'
 
@@ -28,6 +32,12 @@ src_install() {
 
 	dodir /usr
 	cp -RL dist/* ${D}/usr
+
+	sed -i -e 's|-Wl,-R$libdir ||g' ${D}/usr/bin/nspr-config
+	sed -i -e 's| -Wl,-R${libdir}||g' ${D}/usr/bin/nspr.pc
+
+	dodir /usr/lib/pkgconfig
+	mv ${D}/usr/bin/nspr.pc ${D}/usr/lib/pkgconfig/
 
 	rm -f ${D}/usr/bin/prerr.properties ${D}/usr/lib/cyg*.dll
 }
