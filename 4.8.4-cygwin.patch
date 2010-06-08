@@ -1,14 +1,14 @@
---- origsrc/nspr-4.7.4/mozilla/nsprpub/config/rules.mk	2009-03-24 17:49:17.000000000 -0500
-+++ src/nspr-4.7.4/mozilla/nsprpub/config/rules.mk	2009-04-12 12:51:22.511242000 -0500
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/config/rules.mk	2010-06-07 09:09:18.244892100 -0500
++++ src/nspr-4.8.4/mozilla/nsprpub/config/rules.mk	2010-06-07 09:09:25.789323600 -0500
 @@ -106,7 +106,7 @@ endif
  #
  
  ifdef LIBRARY_NAME
--ifeq (,$(filter-out WINNT OS2,$(OS_ARCH)))
-+ifeq (,$(filter-out WINNT OS2 CYGWIN,$(OS_ARCH)))
+-ifeq (,$(filter-out WINNT WINCE OS2,$(OS_ARCH)))
++ifeq (,$(filter-out WINNT WINCE OS2 CYGWIN,$(OS_ARCH)))
  
  #
- # Win95, Win16, and OS/2 require library names conforming to the 8.3 rule.
+ # Win95 and OS/2 require library names conforming to the 8.3 rule.
 @@ -119,8 +119,8 @@ IMPORT_LIBRARY	= $(OBJDIR)/$(LIBRARY_NAM
  SHARED_LIB_PDB	= $(OBJDIR)/$(LIBRARY_NAME)$(LIBRARY_VERSION).pdb
  else
@@ -16,7 +16,7 @@
 -SHARED_LIBRARY	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).$(DLL_SUFFIX)
 -IMPORT_LIBRARY	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).$(LIB_SUFFIX)
 +SHARED_LIBRARY	= $(OBJDIR)/cyg$(LIBRARY_NAME)$(LIBRARY_VERSION).$(DLL_SUFFIX)
-+IMPORT_LIBRARY	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).$(DLL_SUFFIX).$(LIB_SUFFIX)
++IMPORT_LIBRARY	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).dll.a
  SHARED_LIB_PDB	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).pdb
  endif
  
@@ -24,13 +24,13 @@
  endif
  
  ifndef TARGETS
--ifeq (,$(filter-out WINNT OS2,$(OS_ARCH)))
-+ifeq (,$(filter-out WINNT OS2 CYGWIN,$(OS_ARCH)))
+-ifeq (,$(filter-out WINNT WINCE OS2,$(OS_ARCH)))
++ifeq (,$(filter-out WINNT WINCE OS2 CYGWIN,$(OS_ARCH)))
  TARGETS		= $(LIBRARY) $(SHARED_LIBRARY) $(IMPORT_LIBRARY)
  ifndef BUILD_OPT
  ifdef MSC_VER
---- origsrc/nspr-4.7.4/mozilla/nsprpub/configure.in	2008-12-04 18:46:50.000000000 -0600
-+++ src/nspr-4.7.4/mozilla/nsprpub/configure.in	2009-04-12 12:51:22.526867000 -0500
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/configure.in	2010-06-07 09:09:18.261893100 -0500
++++ src/nspr-4.8.4/mozilla/nsprpub/configure.in	2010-06-07 09:09:25.795324000 -0500
 @@ -97,7 +97,7 @@ HOST_CFLAGS="${HOST_CFLAGS=}"
  HOST_LDFLAGS="${HOST_LDFLAGS=}"
  
@@ -40,7 +40,7 @@
      # Check to see if we are really running in a msvc environemnt
      _WIN32_MSVC=
      AC_CHECK_PROGS(CC, cl)
-@@ -763,10 +763,23 @@ Windows_NT)
+@@ -755,10 +755,23 @@ Windows_NT)
          CPU_ARCH=x86
      fi
      ;;
@@ -65,16 +65,16 @@
  # If uname -s returns MINGW32_NT-5.1, we assume that we are using
  # the uname.exe in the MSYS tools.
  #
-@@ -817,7 +830,7 @@ case "$host" in
+@@ -806,7 +819,7 @@ case "$host" in
  *-mingw*)
      NSINSTALL=nsinstall
      ;;
--*-cygwin*|*-msvc*|*-mks*)
-+*-msvc*|*-mks*)
+-*-cygwin*|*-msvc*|*-mks*|*-wince*|*-winmo*)
++*-msvc*|*-mks*|*-wince*|*-winmo*)
      NSINSTALL='$(CYGWIN_WRAPPER) nsinstall'
      if test `echo "${PATH}" | grep -c \;` = 0; then
          CYGWIN_WRAPPER='sh $(topsrcdir)/build/cygwin-wrapper'
-@@ -992,6 +1005,32 @@ case "$target" in
+@@ -981,6 +994,29 @@ case "$target" in
  
      ;;
  
@@ -95,9 +95,6 @@
 +    DLL_SUFFIX=dll
 +    IMPORT_LIBRARY='lib$(LIBRARY_NAME).$(DLL_SUFFIX).$(LIB_SUFFIX)'
 +    MKSHLIB='$(CC) -shared -Wl,--enable-auto-image-base -Wl,--out-implib,$(IMPORT_LIBRARY) -o $(subst $(OBJDIR)/,,$(SHARED_LIBRARY))'
-+    RC=$WINDRES
-+    # Use temp file for windres (bug 213281)
-+    RCFLAGS='-O coff --use-temp-file'
 +
 +    if test -n "$USE_STATIC_TLS"; then
 +        AC_DEFINE(_PR_USE_STATIC_TLS)
@@ -107,7 +104,7 @@
  *-darwin*)
      AC_DEFINE(XP_UNIX)
      AC_DEFINE(DARWIN)
-@@ -1503,7 +1542,7 @@ tools are selected during the Xcode/Deve
+@@ -1485,7 +1521,7 @@ tools are selected during the Xcode/Deve
      esac    
      ;;
  
@@ -116,17 +113,26 @@
      AC_DEFINE(XP_PC)
      AC_DEFINE(WIN32)
      PR_MD_ARCH_DIR=windows
-@@ -2610,7 +2649,7 @@ case "$target" in
+@@ -2655,7 +2691,7 @@ case "$target" in
          AC_DEFINE(_PR_LOCAL_THREADS_ONLY)
      fi
      ;;
--*-mingw*|*-cygwin*|*-msvc*|*-mks*|*-os2*|*-beos*)
-+*-mingw*|*-msvc*|*-mks*|*-os2*|*-beos*)
-     dnl win32, os2 & beos cannot use pthreads
+-*-mingw*|*-cygwin*|*-msvc*|*-mks*|*-wince*|*-winmo*|*-os2*|*-beos*)
++*-mingw*|*-msvc*|*-mks*|*-wince*|*-winmo*|*-os2*|*-beos*)
+     dnl win32, wince, os2 & beos cannot use pthreads
      USE_PTHREADS=
      _PTHREAD_LDFLAGS=
---- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_cygwin.cfg	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_cygwin.cfg	2009-04-12 12:51:22.542492000 -0500
+@@ -2744,7 +2780,7 @@ dnl ====================================
+ dnl Use cygwin wrapper for win32 builds, except MSYS/MinGW
+ dnl ========================================================
+ case "$target_os" in
+-cygwin*|msvc*|mks*)
++msvc*|mks*)
+     CC="\$(CYGWIN_WRAPPER) $CC"
+     CXX="\$(CYGWIN_WRAPPER) $CXX"
+     RC="\$(CYGWIN_WRAPPER) $RC"
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/pr/include/md/_cygwin.cfg	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.8.4/mozilla/nsprpub/pr/include/md/_cygwin.cfg	2010-06-07 09:09:25.802324400 -0500
 @@ -0,0 +1,149 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -165,11 +171,6 @@
 + *
 + * ***** END LICENSE BLOCK ***** */
 +
-+/*
-+ * This file is used by not only Linux but also other glibc systems
-+ * such as GNU/Hurd and GNU/k*BSD.
-+ */
-+
 +#ifndef nspr_cpucfg___
 +#define nspr_cpucfg___
 +
@@ -204,7 +205,6 @@
 +#define PR_BITS_PER_FLOAT   32
 +#define PR_BITS_PER_DOUBLE  64
 +#define PR_BITS_PER_WORD    32
-+#define PR_BITS_PER_DWORD   64
 +
 +#define PR_BITS_PER_BYTE_LOG2   3
 +#define PR_BITS_PER_SHORT_LOG2  4
@@ -229,6 +229,12 @@
 +
 +#ifndef HAVE_LONG_LONG
 +#define	HAVE_LONG_LONG
++#endif
++#if PR_ALIGN_OF_DOUBLE == 8
++#define HAVE_ALIGNED_DOUBLES
++#endif
++#if PR_ALIGN_OF_INT64 == 8
++#define HAVE_ALIGNED_LONGLONGS
 +#endif
 +
 +#ifndef NO_NSPR_10_SUPPORT
@@ -277,9 +283,9 @@
 +#endif /* NO_NSPR_10_SUPPORT */
 +
 +#endif /* nspr_cpucfg___ */
---- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_cygwin.h	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_cygwin.h	2009-04-12 12:51:22.558117000 -0500
-@@ -0,0 +1,280 @@
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/pr/include/md/_cygwin.h	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.8.4/mozilla/nsprpub/pr/include/md/_cygwin.h	2010-06-07 10:58:05.801247000 -0500
+@@ -0,0 +1,264 @@
 +/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
 + * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -317,11 +323,6 @@
 + *
 + * ***** END LICENSE BLOCK ***** */
 +
-+/*
-+ * This file is used by not only Linux but also other glibc systems
-+ * such as GNU/Hurd and GNU/k*BSD.
-+ */
-+
 +#ifndef nspr_cygwin_defs_h___
 +#define nspr_cygwin_defs_h___
 +
@@ -344,7 +345,7 @@
 +#undef	HAVE_STACK_GROWING_UP
 +
 +/*
-+ * Elf linux supports dl* functions
++ * Cygwin supports dl* functions
 + */
 +#define HAVE_DLL
 +#define USE_DLFCN
@@ -366,17 +367,14 @@
 +#define _PR_POLL_AVAILABLE
 +#undef _PR_USE_POLL
 +#define _PR_STAT_HAS_ONLY_ST_ATIME
-+#define _PR_NO_LARGE_FILES
-+#undef _PR_INET6
-+#undef _PR_HAVE_INET_NTOP
-+#undef _PR_HAVE_GETHOSTBYNAME2
-+#undef _PR_HAVE_GETADDRINFO
-+#undef _PR_INET6_PROBE
-+
++#define _PR_HAVE_LARGE_OFF_T
++#define _PR_INET6
++#define _PR_HAVE_INET_NTOP
++#define _PR_HAVE_GETHOSTBYNAME2
++#define _PR_HAVE_GETADDRINFO
++#define _PR_INET6_PROBE
 +#define _PR_HAVE_SYSV_SEMAPHORES
 +#define PR_HAVE_SYSV_NAMED_SHARED_MEMORY
-+#undef _PR_HAVE_GETHOST_R
-+#undef _PR_HAVE_GETHOST_R_INT
 +
 +#ifdef _PR_PTHREADS
 +
@@ -391,21 +389,11 @@
 +
 +#define CONTEXT(_th) ((_th)->md.context)
 +
-+/* Intel based Linux */
-+#if defined(__GLIBC__) && __GLIBC__ >= 2
 +#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[JB_SP]
 +#define _MD_SET_FP(_t, val) ((_t)->md.context[0].__jmpbuf[JB_BP] = val)
 +#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
 +#define _MD_GET_FP_PTR(_t) (&(_t)->md.context[0].__jmpbuf[JB_BP])
 +#define _MD_SP_TYPE int
-+#else
-+#define _MD_GET_SP(_t) (_t)->md.context[0].__jmpbuf[0].__sp
-+#define _MD_SET_FP(_t, val) ((_t)->md.context[0].__jmpbuf[0].__bp = val)
-+#define _MD_GET_SP_PTR(_t) &(_MD_GET_SP(_t))
-+#define _MD_GET_FP_PTR(_t) &((_t)->md.context[0].__jmpbuf[0].__bp)
-+#define _MD_SP_TYPE __ptr_t
-+#endif /* defined(__GLIBC__) && __GLIBC__ >= 2 */
-+#define PR_NUM_GCREGS   6
 +
 +/*
 +** Initialize a thread context to run "_main()" when started
@@ -551,37 +539,38 @@
 + */
 +#define _MD_SELECT __select
 +
++#ifdef _PR_POLL_AVAILABLE
 +#include <sys/poll.h>
 +extern int __syscall_poll(struct pollfd *ufds, unsigned long int nfds,
 +	int timeout);
 +#define _MD_POLL __syscall_poll
++#endif
 +
 +/* For writev() */
 +#include <sys/uio.h>
 +
 +#endif /* nspr_cygwin_defs_h___ */
---- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_pth.h	2008-07-26 12:49:39.000000000 -0500
-+++ src/nspr-4.7.4/mozilla/nsprpub/pr/include/md/_pth.h	2009-04-12 12:51:22.558117000 -0500
-@@ -147,7 +147,8 @@
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/pr/include/md/_pth.h	2009-05-08 19:16:52.000000000 -0500
++++ src/nspr-4.8.4/mozilla/nsprpub/pr/include/md/_pth.h	2010-06-07 09:30:29.983631400 -0500
+@@ -142,7 +142,7 @@
+ 	|| defined(LINUX) || defined(__GNU__) || defined(__GLIBC__) \
  	|| defined(HPUX) || defined(FREEBSD) \
  	|| defined(NETBSD) || defined(OPENBSD) || defined(BSDI) \
- 	|| defined(VMS) || defined(NTO) || defined(DARWIN) \
--	|| defined(UNIXWARE) || defined(RISCOS)	|| defined(SYMBIAN)
-+	|| defined(UNIXWARE) || defined(RISCOS)	|| defined(SYMBIAN) \
-+	|| defined(CYGWIN)
+-	|| defined(NTO) || defined(DARWIN) \
++	|| defined(NTO) || defined(DARWIN) || defined(CYGWIN) \
+ 	|| defined(UNIXWARE) || defined(RISCOS)	|| defined(SYMBIAN)
  #ifdef __GNU__
  /* Hurd pthreads don't have an invalid value for pthread_t. -- rmh */
- #error Using Hurd pthreads
-@@ -204,7 +205,7 @@
+@@ -200,7 +200,7 @@
  	|| defined(LINUX) || defined(__GNU__)|| defined(__GLIBC__) \
  	|| defined(FREEBSD) || defined(NETBSD) || defined(OPENBSD) \
- 	|| defined(BSDI) || defined(VMS) || defined(UNIXWARE) \
+ 	|| defined(BSDI) || defined(UNIXWARE) \
 -	|| defined(DARWIN) || defined(SYMBIAN)
-+	|| defined(DARWIN) || defined(SYMBIAN) || defined(CYGWIN)
++	|| defined(DARWIN) || defined(CYGWIN) || defined(SYMBIAN)
  #define PT_NO_SIGTIMEDWAIT
  #endif
  
-@@ -235,7 +236,7 @@
+@@ -231,7 +231,7 @@
  #endif /* defined(_PR_DCETHREADS) */
  
  #elif defined(LINUX) || defined(__GNU__) || defined(__GLIBC__) \
@@ -590,19 +579,27 @@
  #define PT_PRIO_MIN            sched_get_priority_min(SCHED_OTHER)
  #define PT_PRIO_MAX            sched_get_priority_max(SCHED_OTHER)
  #elif defined(NTO)
-@@ -295,7 +296,8 @@ extern int (*_PT_aix_yield_fcn)();
+@@ -256,7 +256,7 @@
+ #define PT_PRIO_MAX            31
+ #elif defined(NETBSD) \
+ 	|| defined(BSDI) || defined(DARWIN) || defined(UNIXWARE) \
+-	|| defined(RISCOS) /* XXX */
++	|| defined(RISCOS) || defined(CYGWIN) /* XXX */
+ #define PT_PRIO_MIN            0
+ #define PT_PRIO_MAX            126
+ #else
+@@ -290,7 +290,7 @@ extern int (*_PT_aix_yield_fcn)();
+ #elif defined(HPUX) || defined(SOLARIS) \
  	|| defined(LINUX) || defined(__GNU__) || defined(__GLIBC__) \
  	|| defined(FREEBSD) || defined(NETBSD) || defined(OPENBSD) \
- 	|| defined(BSDI) || defined(NTO) || defined(DARWIN) \
--	|| defined(UNIXWARE) || defined(RISCOS) || defined(SYMBIAN)
-+	|| defined(UNIXWARE) || defined(RISCOS) || defined(SYMBIAN) \
-+	|| defined(CYGWIN)
+-	|| defined(BSDI) || defined(NTO) || defined(DARWIN) \
++	|| defined(BSDI) || defined(NTO) || defined(DARWIN) || defined(CYGWIN) \
+ 	|| defined(UNIXWARE) || defined(RISCOS) || defined(SYMBIAN)
  #define _PT_PTHREAD_YIELD()            	sched_yield()
  #else
- #error "Need to define _PT_PTHREAD_YIELD for this platform"
---- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/include/md/prosdep.h	2008-07-26 12:49:39.000000000 -0500
-+++ src/nspr-4.7.4/mozilla/nsprpub/pr/include/md/prosdep.h	2009-04-12 12:51:22.573742000 -0500
-@@ -72,6 +72,9 @@ PR_BEGIN_EXTERN_C
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/pr/include/md/prosdep.h	2009-05-01 18:08:03.000000000 -0500
++++ src/nspr-4.8.4/mozilla/nsprpub/pr/include/md/prosdep.h	2010-06-07 09:09:25.819325300 -0500
+@@ -66,6 +66,9 @@ PR_BEGIN_EXTERN_C
  #if defined(AIX)
  #include "md/_aix.h"
  
@@ -612,8 +609,35 @@
  #elif defined(FREEBSD)
  #include "md/_freebsd.h"
  
---- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/cygwin.c	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/cygwin.c	2009-04-12 12:51:22.573742000 -0500
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/pr/src/linking/prlink.c	2010-01-07 16:04:45.000000000 -0600
++++ src/nspr-4.8.4/mozilla/nsprpub/pr/src/linking/prlink.c	2010-06-07 11:06:34.632350400 -0500
+@@ -388,8 +388,22 @@ PR_GetLibraryName(const char *path, cons
+             fullname = PR_smprintf("%s", lib);
+         }
+     }
+-#endif /* XP_PC */
+-#if defined(XP_UNIX) || defined(XP_BEOS)
++#elif defined(CYGWIN)
++    if (strstr(lib, PR_DLL_SUFFIX) == NULL)
++    {
++        if (path) {
++            fullname = PR_smprintf("%s/cyg%s%s", path, lib, PR_DLL_SUFFIX);
++        } else {
++            fullname = PR_smprintf("cyg%s%s", lib, PR_DLL_SUFFIX);
++        }
++    } else {
++        if (path) {
++            fullname = PR_smprintf("%s/%s", path, lib);
++        } else {
++            fullname = PR_smprintf("%s", lib);
++        }
++    }
++#elif defined(XP_UNIX) || defined(XP_BEOS)
+     if (strstr(lib, PR_DLL_SUFFIX) == NULL)
+     {
+         if (path) {
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/pr/src/md/unix/cygwin.c	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.8.4/mozilla/nsprpub/pr/src/md/unix/cygwin.c	2010-06-07 09:35:38.818295700 -0500
 @@ -0,0 +1,114 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -709,7 +733,7 @@
 +    return PR_SUCCESS;
 +}
 +
-+/* These functions should not be called for Linux */
++/* These functions should not be called for Cygwin */
 +void
 +_MD_YIELD(void)
 +{
@@ -729,42 +753,46 @@
 +	return PR_FAILURE;
 +}
 +#endif /* ! _PR_PTHREADS */
---- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	2009-04-12 12:51:22.589367000 -0500
-@@ -0,0 +1,120 @@
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.8.4/mozilla/nsprpub/pr/src/md/unix/os_Cygwin_x86.s	2010-06-07 09:09:25.833326100 -0500
+@@ -0,0 +1,114 @@
 +/ -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*-
 +/ 
-+/ The contents of this file are subject to the Mozilla Public
-+/ License Version 1.1 (the "License"); you may not use this file
-+/ except in compliance with the License. You may obtain a copy of
-+/ the License at http://www.mozilla.org/MPL/
-+/ 
-+/ Software distributed under the License is distributed on an "AS
-+/ IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
-+/ implied. See the License for the specific language governing
-+/ rights and limitations under the License.
-+/ 
++/ ***** BEGIN LICENSE BLOCK *****
++/ Version: MPL 1.1/GPL 2.0/LGPL 2.1
++/
++/ The contents of this file are subject to the Mozilla Public License Version
++/ 1.1 (the "License"); you may not use this file except in compliance with
++/ the License. You may obtain a copy of the License at
++/ http://www.mozilla.org/MPL/
++/
++/ Software distributed under the License is distributed on an "AS IS" basis,
++/ WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
++/ for the specific language governing rights and limitations under the
++/ License.
++/
 +/ The Original Code is the Netscape Portable Runtime (NSPR).
-+/ 
-+/ The Initial Developer of the Original Code is Netscape
-+/ Communications Corporation.  Portions created by Netscape are 
-+/ Copyright (C) 2000 Netscape Communications Corporation.  All
-+/ Rights Reserved.
-+/ 
++/
++/ The Initial Developer of the Original Code is
++/ Netscape Communications Corporation.
++/ Portions created by the Initial Developer are Copyright (C) 2000
++/ the Initial Developer. All Rights Reserved.
++/
 +/ Contributor(s):
-+/ 
-+/ Alternatively, the contents of this file may be used under the
-+/ terms of the GNU General Public License Version 2 or later (the
-+/ "GPL"), in which case the provisions of the GPL are applicable 
-+/ instead of those above.  If you wish to allow use of your 
-+/ version of this file only under the terms of the GPL and not to
-+/ allow others to use your version of this file under the MPL,
-+/ indicate your decision by deleting the provisions above and
-+/ replace them with the notice and other provisions required by
-+/ the GPL.  If you do not delete the provisions above, a recipient
-+/ may use your version of this file under either the MPL or the
-+/ GPL.
-+/ 
++/
++/ Alternatively, the contents of this file may be used under the terms of
++/ either the GNU General Public License Version 2 or later (the "GPL"), or
++/ the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
++/ in which case the provisions of the GPL or the LGPL are applicable instead
++/ of those above. If you wish to allow use of your version of this file only
++/ under the terms of either the GPL or the LGPL, and not to allow others to
++/ use your version of this file under the terms of the MPL, indicate your
++/ decision by deleting the provisions above and replace them with the notice
++/ and other provisions required by the GPL or the LGPL. If you do not delete
++/ the provisions above, a recipient may use your version of this file under
++/ the terms of any one of the MPL, the GPL or the LGPL.
++/
++/ ***** END LICENSE BLOCK *****
 +
 +/ PRInt32 _PR_x86_AtomicIncrement(PRInt32 *val)
 +/
@@ -772,10 +800,8 @@
 +/ the result of the increment.
 +/
 +    .text
-+    .globl _PR_x86_AtomicIncrement
 +    .globl __PR_x86_AtomicIncrement
 +    .align 4
-+_PR_x86_AtomicIncrement:
 +__PR_x86_AtomicIncrement:
 +    movl 4(%esp), %ecx
 +    movl $1, %eax
@@ -790,10 +816,8 @@
 +/ the result of the decrement.
 +/
 +    .text
-+    .globl _PR_x86_AtomicDecrement
 +    .globl __PR_x86_AtomicDecrement
 +    .align 4
-+_PR_x86_AtomicDecrement:
 +__PR_x86_AtomicDecrement:
 +    movl 4(%esp), %ecx
 +    movl $-1, %eax
@@ -822,14 +846,11 @@
 +/   ret
 +/
 +    .text
-+    .globl _PR_x86_AtomicSet
 +    .globl __PR_x86_AtomicSet
 +    .align 4
-+_PR_x86_AtomicSet:
 +__PR_x86_AtomicSet:
 +    movl 4(%esp), %ecx
 +    movl 8(%esp), %eax
-+    lock
 +    xchgl %eax, (%ecx)
 +    ret
 +
@@ -839,10 +860,8 @@
 +/ and return the result of the addition.
 +/
 +    .text
-+    .globl _PR_x86_AtomicAdd
 +    .globl __PR_x86_AtomicAdd
 +    .align 4
-+_PR_x86_AtomicAdd:
 +__PR_x86_AtomicAdd:
 +    movl 4(%esp), %ecx
 +    movl 8(%esp), %eax
@@ -851,20 +870,19 @@
 +    xaddl %eax, (%ecx)
 +    addl %edx, %eax
 +    ret
-+
---- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2008-10-07 16:45:09.000000000 -0500
-+++ src/nspr-4.7.4/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2009-04-12 12:51:22.604992000 -0500
-@@ -140,7 +140,7 @@ GetHighResClock(void *buf, size_t maxbyt
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2009-05-01 18:08:05.000000000 -0500
++++ src/nspr-4.8.4/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2010-06-07 09:09:25.837326400 -0500
+@@ -122,7 +122,7 @@ GetHighResClock(void *buf, size_t maxbyt
  
  #elif (defined(LINUX) || defined(FREEBSD) || defined(__FreeBSD_kernel__) \
      || defined(NETBSD) || defined(__NetBSD_kernel__) || defined(OPENBSD) \
 -    || defined(SYMBIAN))
-+    || defined(SYMBIAN) || defined(CYGWIN))
++    || defined(SYMBIAN)) || defined(CYGWIN)
  #include <sys/types.h>
  #include <sys/stat.h>
  #include <fcntl.h>
---- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/src/pthreads/ptio.c	2008-08-23 12:04:34.000000000 -0500
-+++ src/nspr-4.7.4/mozilla/nsprpub/pr/src/pthreads/ptio.c	2009-04-12 12:51:22.620617000 -0500
+--- origsrc/nspr-4.8.4/mozilla/nsprpub/pr/src/pthreads/ptio.c	2009-05-09 22:07:02.000000000 -0500
++++ src/nspr-4.8.4/mozilla/nsprpub/pr/src/pthreads/ptio.c	2010-06-07 09:09:25.844326800 -0500
 @@ -60,7 +60,7 @@
  #include <sys/uio.h>
  #include <sys/file.h>
@@ -874,19 +892,18 @@
  #include <sys/utsname.h> /* for uname */
  #endif
  #if defined(SOLARIS) || defined(UNIXWARE)
-@@ -212,7 +212,8 @@ static PRBool _pr_ipv6_v6only_on_by_defa
+@@ -211,7 +211,7 @@ static PRBool _pr_ipv6_v6only_on_by_defa
+     || defined(HPUX10_30) || defined(HPUX11) \
      || defined(LINUX) || defined(__GNU__) || defined(__GLIBC__) \
      || defined(FREEBSD) || defined(NETBSD) || defined(OPENBSD) \
-     || defined(BSDI) || defined(VMS) || defined(NTO) || defined(DARWIN) \
--    || defined(UNIXWARE) || defined(RISCOS) || defined(SYMBIAN)
-+    || defined(UNIXWARE) || defined(RISCOS) || defined(SYMBIAN) \
-+	|| defined(CYGWIN)
+-    || defined(BSDI) || defined(NTO) || defined(DARWIN) \
++    || defined(BSDI) || defined(NTO) || defined(DARWIN) || defined(CYGWIN) \
+     || defined(UNIXWARE) || defined(RISCOS) || defined(SYMBIAN)
  #define _PRSelectFdSetArg_t fd_set *
  #else
- #error "Cannot determine architecture"
-@@ -3272,7 +3273,7 @@ static PRIOMethods _pr_socketpollfd_meth
+@@ -3271,7 +3271,7 @@ static PRIOMethods _pr_socketpollfd_meth
      || defined(AIX) || defined(FREEBSD) || defined(NETBSD) \
-     || defined(OPENBSD) || defined(BSDI) || defined(VMS) || defined(NTO) \
+     || defined(OPENBSD) || defined(BSDI) || defined(NTO) \
      || defined(DARWIN) || defined(UNIXWARE) || defined(RISCOS) \
 -    || defined(SYMBIAN)
 +    || defined(SYMBIAN) || defined(CYGWIN)
