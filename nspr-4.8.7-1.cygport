@@ -8,7 +8,7 @@ PATCH_URI="
 	4.7.4-gcc43.patch
 "
 
-PKG_NAMES="${PN} lib${PN}4 lib${PN}-devel"
+PKG_NAMES="lib${PN}4 lib${PN}-devel"
 libnspr4_CONTENTS='usr/bin/*4.dll' # usr/share/doc/'
 libnspr_devel_CONTENTS="--exclude=*.dll usr/bin/ usr/include/ usr/lib/ usr/share/aclocal/"
 
