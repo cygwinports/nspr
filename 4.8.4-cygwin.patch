@@ -901,3 +901,14 @@
  #define _PR_FCNTL_FLAGS O_NONBLOCK
  #else
  #error "Can't determine architecture"
+--- origsrc/nspr-4.8.9/mozilla/nsprpub/pr/src/pthreads/ptthread.c	2010-11-17 20:48:53.000000000 -0600
++++ src/nspr-4.8.9/mozilla/nsprpub/pr/src/pthreads/ptthread.c	2011-12-11 02:15:27.838192800 -0600
+@@ -52,7 +52,7 @@
+ #include <string.h>
+ #include <signal.h>
+ 
+-#ifdef SYMBIAN
++#if defined(SYMBIAN) || defined(__CYGWIN__)
+ /* In Open C sched_get_priority_min/max do not work properly, so we undefine
+  * _POSIX_THREAD_PRIORITY_SCHEDULING here.
+  */
