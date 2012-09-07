@@ -867,8 +867,8 @@
  
  #elif (defined(LINUX) || defined(FREEBSD) || defined(__FreeBSD_kernel__) \
      || defined(NETBSD) || defined(__NetBSD_kernel__) || defined(OPENBSD) \
--    || defined(SYMBIAN))
-+    || defined(SYMBIAN)) || defined(CYGWIN)
+-    || defined(SYMBIAN) || defined(__GNU__))
++    || defined(SYMBIAN) || defined(__GNU__) || defined(CYGWIN))
  #include <sys/types.h>
  #include <sys/stat.h>
  #include <fcntl.h>
