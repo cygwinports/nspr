@@ -1,5 +1,5 @@
---- origsrc/nspr-4.7.4/mozilla/nsprpub/pr/src/misc/prdtoa.c	2009-03-19 22:33:11.000000000 -0500
-+++ src/nspr-4.7.4/mozilla/nsprpub/pr/src/misc/prdtoa.c	2009-04-12 12:51:22.604992000 -0500
+--- origsrc/nspr-4.7.4/nspr/pr/src/misc/prdtoa.c	2009-03-19 22:33:11.000000000 -0500
++++ src/nspr-4.7.4/nspr/pr/src/misc/prdtoa.c	2009-04-12 12:51:22.604992000 -0500
 @@ -2701,7 +2701,7 @@ freedtoa(char *s)
   *	   calculation.
   */

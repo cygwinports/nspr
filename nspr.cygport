@@ -1,5 +1,5 @@
 NAME="nspr"
-VERSION=4.9.6
+VERSION=4.10.3
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="Netscape Portable Runtime library"
@@ -9,18 +9,17 @@ client, many of Netscape/AOL/iPlanet's and other software offerings."
 HOMEPAGE="http://www.mozilla.org/projects/nspr/"
 SRC_URI="ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${PV}/src/${P}.tar.gz"
 PATCH_URI="
-	mirror://portage/dev-libs/${PN}/files/${PN}-4.7.0-prtime.patch
 	4.8.4-cygwin.patch
 	4.7.4-gcc43.patch
 "
 
 PKG_NAMES="lib${PN}4 lib${PN}-devel"
-libnspr4_CONTENTS='usr/bin/*4.dll' # usr/share/doc/'
+libnspr4_CONTENTS='usr/bin/*4.dll usr/share/doc/'
 libnspr_devel_CONTENTS="--exclude=*.dll usr/bin/ usr/include/ usr/lib/ usr/share/aclocal/"
 
 DIFF_EXCLUDES='configure'
 
-MOZ_SRC_DIR="mozilla/nsprpub"
+MOZ_SRC_DIR="nspr"
 WANT_AUTOCONF=2.1
 MAKEOPTS+=' -j1'
 
@@ -48,3 +47,5 @@ src_install() {
 
 	rm -f ${D}/usr/bin/prerr.properties ${D}/usr/lib/cyg*.dll
 }
+
+DOCS="nspr/LICENSE"

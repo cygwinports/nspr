@@ -1,5 +1,5 @@
---- origsrc/nspr-4.9.6/mozilla/nsprpub/config/rules.mk	2013-08-06 01:25:42.712041100 -0500
-+++ src/nspr-4.9.6/mozilla/nsprpub/config/rules.mk	2013-08-06 01:25:20.000000000 -0500
+--- origsrc/nspr-4.9.6/nspr/config/rules.mk	2013-08-06 01:25:42.712041100 -0500
++++ src/nspr-4.9.6/nspr/config/rules.mk	2013-08-06 01:25:20.000000000 -0500
 @@ -74,7 +74,7 @@ endif
  #
  
@@ -29,8 +29,8 @@
  TARGETS		= $(LIBRARY) $(SHARED_LIBRARY) $(IMPORT_LIBRARY)
  ifdef MOZ_DEBUG_SYMBOLS
  ifdef MSC_VER
---- origsrc/nspr-4.9.6/mozilla/nsprpub/configure.in	2013-08-06 01:25:42.733042300 -0500
-+++ src/nspr-4.9.6/mozilla/nsprpub/configure.in	2013-08-06 01:49:21.729204200 -0500
+--- origsrc/nspr-4.9.6/nspr/configure.in	2013-08-06 01:25:42.733042300 -0500
++++ src/nspr-4.9.6/nspr/configure.in	2013-08-06 01:49:21.729204200 -0500
 @@ -66,7 +66,7 @@ HOST_CFLAGS="${HOST_CFLAGS=}"
  HOST_LDFLAGS="${HOST_LDFLAGS=}"
  
@@ -129,8 +129,8 @@
      CC="\$(CYGWIN_WRAPPER) $CC"
      CXX="\$(CYGWIN_WRAPPER) $CXX"
      RC="\$(CYGWIN_WRAPPER) $RC"
---- origsrc/nspr-4.9.6/mozilla/nsprpub/pr/include/md/_cygwin.cfg	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.9.6/mozilla/nsprpub/pr/include/md/_cygwin.cfg	2013-08-06 01:44:06.773189800 -0500
+--- origsrc/nspr-4.9.6/nspr/pr/include/md/_cygwin.cfg	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.9.6/nspr/pr/include/md/_cygwin.cfg	2013-08-06 01:44:06.773189800 -0500
 @@ -0,0 +1,197 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -329,8 +329,8 @@
 +#endif /* NO_NSPR_10_SUPPORT */
 +
 +#endif /* nspr_cpucfg___ */
---- origsrc/nspr-4.9.6/mozilla/nsprpub/pr/include/md/_cygwin.h	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.9.6/mozilla/nsprpub/pr/include/md/_cygwin.h	2013-08-06 01:49:44.699518100 -0500
+--- origsrc/nspr-4.9.6/nspr/pr/include/md/_cygwin.h	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.9.6/nspr/pr/include/md/_cygwin.h	2013-08-06 01:49:44.699518100 -0500
 @@ -0,0 +1,255 @@
 +/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -587,8 +587,8 @@
 +#include <sys/uio.h>
 +
 +#endif /* nspr_cygwin_defs_h___ */
---- origsrc/nspr-4.9.6/mozilla/nsprpub/pr/include/md/_pth.h	2013-08-06 01:25:42.816047100 -0500
-+++ src/nspr-4.9.6/mozilla/nsprpub/pr/include/md/_pth.h	2013-08-06 01:25:20.000000000 -0500
+--- origsrc/nspr-4.9.6/nspr/pr/include/md/_pth.h	2013-08-06 01:25:42.816047100 -0500
++++ src/nspr-4.9.6/nspr/pr/include/md/_pth.h	2013-08-06 01:25:20.000000000 -0500
 @@ -116,7 +116,7 @@
  	|| defined(LINUX) || defined(__GNU__) || defined(__GLIBC__) \
  	|| defined(HPUX) || defined(FREEBSD) \
@@ -625,8 +625,8 @@
  	|| defined(UNIXWARE) || defined(RISCOS) || defined(SYMBIAN)
  #define _PT_PTHREAD_YIELD()            	sched_yield()
  #else
---- origsrc/nspr-4.9.6/mozilla/nsprpub/pr/include/md/prosdep.h	2013-08-06 01:25:42.868050000 -0500
-+++ src/nspr-4.9.6/mozilla/nsprpub/pr/include/md/prosdep.h	2013-08-06 01:25:20.000000000 -0500
+--- origsrc/nspr-4.9.6/nspr/pr/include/md/prosdep.h	2013-08-06 01:25:42.868050000 -0500
++++ src/nspr-4.9.6/nspr/pr/include/md/prosdep.h	2013-08-06 01:25:20.000000000 -0500
 @@ -34,6 +34,9 @@ PR_BEGIN_EXTERN_C
  #if defined(AIX)
  #include "md/_aix.h"
@@ -637,8 +637,8 @@
  #elif defined(FREEBSD)
  #include "md/_freebsd.h"
  
---- origsrc/nspr-4.9.6/mozilla/nsprpub/pr/src/linking/prlink.c	2013-08-06 01:25:42.881050800 -0500
-+++ src/nspr-4.9.6/mozilla/nsprpub/pr/src/linking/prlink.c	2013-08-06 01:25:20.000000000 -0500
+--- origsrc/nspr-4.9.6/nspr/pr/src/linking/prlink.c	2013-08-06 01:25:42.881050800 -0500
++++ src/nspr-4.9.6/nspr/pr/src/linking/prlink.c	2013-08-06 01:25:20.000000000 -0500
 @@ -348,8 +348,22 @@ PR_GetLibraryName(const char *path, cons
              fullname = PR_smprintf("%s", lib);
          }
@@ -664,8 +664,8 @@
      if (strstr(lib, PR_DLL_SUFFIX) == NULL)
      {
          if (path) {
---- origsrc/nspr-4.9.6/mozilla/nsprpub/pr/src/md/unix/cygwin.c	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.9.6/mozilla/nsprpub/pr/src/md/unix/cygwin.c	2013-08-06 01:25:20.000000000 -0500
+--- origsrc/nspr-4.9.6/nspr/pr/src/md/unix/cygwin.c	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.9.6/nspr/pr/src/md/unix/cygwin.c	2013-08-06 01:25:20.000000000 -0500
 @@ -0,0 +1,114 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -781,8 +781,8 @@
 +	return PR_FAILURE;
 +}
 +#endif /* ! _PR_PTHREADS */
---- origsrc/nspr-4.9.6/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2013-08-06 01:25:42.911052500 -0500
-+++ src/nspr-4.9.6/mozilla/nsprpub/pr/src/md/unix/uxrng.c	2013-08-06 01:25:20.000000000 -0500
+--- origsrc/nspr-4.9.6/nspr/pr/src/md/unix/uxrng.c	2013-08-06 01:25:42.911052500 -0500
++++ src/nspr-4.9.6/nspr/pr/src/md/unix/uxrng.c	2013-08-06 01:25:20.000000000 -0500
 @@ -86,7 +86,7 @@ GetHighResClock(void *buf, size_t maxbyt
  
  #elif (defined(LINUX) || defined(FREEBSD) || defined(__FreeBSD_kernel__) \
@@ -792,8 +792,8 @@
  #include <sys/types.h>
  #include <sys/stat.h>
  #include <fcntl.h>
---- origsrc/nspr-4.9.6/mozilla/nsprpub/pr/src/pthreads/ptio.c	2013-08-06 01:25:42.931053600 -0500
-+++ src/nspr-4.9.6/mozilla/nsprpub/pr/src/pthreads/ptio.c	2013-08-06 01:25:20.000000000 -0500
+--- origsrc/nspr-4.9.6/nspr/pr/src/pthreads/ptio.c	2013-08-06 01:25:42.931053600 -0500
++++ src/nspr-4.9.6/nspr/pr/src/pthreads/ptio.c	2013-08-06 01:25:20.000000000 -0500
 @@ -28,7 +28,7 @@
  #include <sys/uio.h>
  #include <sys/file.h>
@@ -821,8 +821,8 @@
  #define _PR_FCNTL_FLAGS O_NONBLOCK
  #else
  #error "Can't determine architecture"
---- origsrc/nspr-4.9.6/mozilla/nsprpub/pr/src/pthreads/ptthread.c	2013-08-06 01:25:42.965055600 -0500
-+++ src/nspr-4.9.6/mozilla/nsprpub/pr/src/pthreads/ptthread.c	2013-08-06 01:25:20.000000000 -0500
+--- origsrc/nspr-4.9.6/nspr/pr/src/pthreads/ptthread.c	2013-08-06 01:25:42.965055600 -0500
++++ src/nspr-4.9.6/nspr/pr/src/pthreads/ptthread.c	2013-08-06 01:25:20.000000000 -0500
 @@ -21,7 +21,7 @@
  #include <signal.h>
  #include <dlfcn.h>
