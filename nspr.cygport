@@ -1,5 +1,5 @@
 NAME="nspr"
-VERSION=4.10.3
+VERSION=4.10.6
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="Netscape Portable Runtime library"
@@ -7,25 +7,24 @@ DESCRIPTION="Netscape Portable Runtime (NSPR) provides a platform-neutral API
 for system level and libc like functions. The API is used in the Mozilla
 client, many of Netscape/AOL/iPlanet's and other software offerings."
 HOMEPAGE="http://www.mozilla.org/projects/nspr/"
-SRC_URI="ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${PV}/src/${P}.tar.gz"
+SRC_URI="ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${VERSION}/src/nspr-${VERSION}.tar.gz"
 PATCH_URI="
-	4.8.4-cygwin.patch
+	4.10.6-cygwin.patch
 	4.7.4-gcc43.patch
 "
 
-PKG_NAMES="lib${PN}4 lib${PN}-devel"
+PKG_NAMES="libnspr4 libnspr-devel"
 libnspr4_CONTENTS='usr/bin/*4.dll usr/share/doc/'
 libnspr_devel_CONTENTS="--exclude=*.dll usr/bin/ usr/include/ usr/lib/ usr/share/aclocal/"
 
 DIFF_EXCLUDES='configure'
 
 MOZ_SRC_DIR="nspr"
-WANT_AUTOCONF=2.1
 MAKEOPTS+=' -j1'
 
 src_compile() {
 	cd ${S}/${MOZ_SRC_DIR}
-	autoconf-2.13 || error "autoconf failed"
+	autoconf || error "autoconf failed"
 	cd ${B}
 
 	manifestize config/nsinstall.exe
