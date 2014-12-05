@@ -1,5 +1,5 @@
 NAME="nspr"
-VERSION=4.10.6
+VERSION=4.10.7
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="Netscape Portable Runtime library"
