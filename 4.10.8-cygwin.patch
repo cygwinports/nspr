@@ -1,5 +1,5 @@
---- origsrc/nspr-4.10.6/nspr/config/rules.mk	2014-06-05 16:42:08.000000000 -0500
-+++ src/nspr-4.10.6/nspr/config/rules.mk	2014-10-19 08:13:30.878914000 -0500
+--- origsrc/nspr-4.10.8/nspr/config/rules.mk	2015-01-22 14:44:59.000000000 -0600
++++ src/nspr-4.10.8/nspr/config/rules.mk	2015-06-01 11:25:42.900390600 -0500
 @@ -74,7 +74,7 @@ endif
  #
  
@@ -9,18 +9,24 @@
  
  #
  # Win95 and OS/2 require library names conforming to the 8.3 rule.
-@@ -87,8 +87,8 @@ IMPORT_LIBRARY	= $(OBJDIR)/$(LIBRARY_NAM
+@@ -86,14 +86,14 @@ SHARED_LIBRARY	= $(OBJDIR)/$(LIBRARY_NAM
  SHARED_LIB_PDB	= $(OBJDIR)/$(LIBRARY_NAME)$(LIBRARY_VERSION).pdb
  else
  LIBRARY		= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION)_s.$(LIB_SUFFIX)
 -SHARED_LIBRARY	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).$(DLL_SUFFIX)
--IMPORT_LIBRARY	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).$(LIB_SUFFIX)
 +SHARED_LIBRARY	= $(OBJDIR)/cyg$(LIBRARY_NAME)$(LIBRARY_VERSION).$(DLL_SUFFIX)
-+IMPORT_LIBRARY	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).dll.a
  SHARED_LIB_PDB	= $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).pdb
  endif
  
-@@ -107,7 +107,7 @@ endif
+ ifdef MSC_VER
+ IMPORT_LIBRARY  = $(OBJDIR)/$(LIBRARY_NAME)$(LIBRARY_VERSION).$(LIB_SUFFIX)
+ else
+-IMPORT_LIBRARY  = $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).$(LIB_SUFFIX)
++IMPORT_LIBRARY  = $(OBJDIR)/lib$(LIBRARY_NAME)$(LIBRARY_VERSION).dll.a
+ endif
+ 
+ else
+@@ -111,7 +111,7 @@ endif
  endif
  
  ifndef TARGETS
@@ -29,8 +35,8 @@
  TARGETS		= $(LIBRARY) $(SHARED_LIBRARY) $(IMPORT_LIBRARY)
  ifdef MOZ_DEBUG_SYMBOLS
  ifdef MSC_VER
---- origsrc/nspr-4.10.6/nspr/configure.in	2014-06-05 16:42:08.000000000 -0500
-+++ src/nspr-4.10.6/nspr/configure.in	2014-10-19 08:13:30.894514000 -0500
+--- origsrc/nspr-4.10.8/nspr/configure.in	2015-01-22 14:44:59.000000000 -0600
++++ src/nspr-4.10.8/nspr/configure.in	2015-06-01 11:25:15.730353100 -0500
 @@ -68,7 +68,7 @@ HOST_CFLAGS="${HOST_CFLAGS=}"
  HOST_LDFLAGS="${HOST_LDFLAGS=}"
  
@@ -40,7 +46,7 @@
      # Check to see if we are really running in a msvc environemnt
      _WIN32_MSVC=
      AC_CHECK_PROGS(CC, cl)
-@@ -960,10 +960,23 @@ Windows_NT)
+@@ -968,10 +968,23 @@ Windows_NT)
          CPU_ARCH=x86
      fi
      ;;
@@ -65,7 +71,7 @@
  # If uname -s returns "MINGW32_NT-5.1", we assume that we are using
  # the uname.exe in the MSYS tools.
  # If uname -s returns "MSYS_NT-6.3", we assume that we are using
-@@ -1204,7 +1217,7 @@ case "$host" in
+@@ -1212,7 +1225,7 @@ case "$host" in
  *-mingw*|*-msys*)
      NSINSTALL=nsinstall
      ;;
@@ -74,7 +80,7 @@
      NSINSTALL='$(CYGWIN_WRAPPER) nsinstall'
      if test `echo "${PATH}" | grep -c \;` = 0; then
          CYGWIN_WRAPPER='sh $(topsrcdir)/build/cygwin-wrapper'
-@@ -1379,6 +1392,27 @@ case "$target" in
+@@ -1387,6 +1400,27 @@ case "$target" in
  
      ;;
  
@@ -102,7 +108,7 @@
  *-darwin*)
      AC_DEFINE(XP_UNIX)
      AC_DEFINE(DARWIN)
-@@ -1898,7 +1932,7 @@ tools are selected during the Xcode/Deve
+@@ -1906,7 +1940,7 @@ tools are selected during the Xcode/Deve
      esac    
      ;;
  
@@ -111,7 +117,7 @@
      AC_DEFINE(XP_PC)
      AC_DEFINE(WIN32)
      PR_MD_ARCH_DIR=windows
-@@ -2923,7 +2957,7 @@ case "$target" in
+@@ -2910,7 +2944,7 @@ case "$target" in
          AC_DEFINE(_PR_LOCAL_THREADS_ONLY)
      fi
      ;;
@@ -120,7 +126,7 @@
      dnl win32, os2 & beos cannot use pthreads
      USE_PTHREADS=
      _PTHREAD_LDFLAGS=
-@@ -3012,7 +3046,7 @@ dnl ====================================
+@@ -2999,7 +3033,7 @@ dnl ====================================
  dnl Use cygwin wrapper for win32 builds, except MSYS/MinGW
  dnl ========================================================
  case "$target_os" in
@@ -129,8 +135,8 @@
      CC="\$(CYGWIN_WRAPPER) $CC"
      CXX="\$(CYGWIN_WRAPPER) $CXX"
      RC="\$(CYGWIN_WRAPPER) $RC"
---- origsrc/nspr-4.10.6/nspr/pr/include/md/_cygwin.cfg	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.10.6/nspr/pr/include/md/_cygwin.cfg	2014-10-19 08:13:30.894514000 -0500
+--- origsrc/nspr-4.10.8/nspr/pr/include/md/_cygwin.cfg	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.10.8/nspr/pr/include/md/_cygwin.cfg	2015-06-01 11:25:15.740353200 -0500
 @@ -0,0 +1,197 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -329,8 +335,8 @@
 +#endif /* NO_NSPR_10_SUPPORT */
 +
 +#endif /* nspr_cpucfg___ */
---- origsrc/nspr-4.10.6/nspr/pr/include/md/_cygwin.h	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.10.6/nspr/pr/include/md/_cygwin.h	2014-10-19 08:13:30.894514000 -0500
+--- origsrc/nspr-4.10.8/nspr/pr/include/md/_cygwin.h	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.10.8/nspr/pr/include/md/_cygwin.h	2015-06-01 11:25:15.750353200 -0500
 @@ -0,0 +1,255 @@
 +/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -587,8 +593,8 @@
 +#include <sys/uio.h>
 +
 +#endif /* nspr_cygwin_defs_h___ */
---- origsrc/nspr-4.10.6/nspr/pr/include/md/_pth.h	2014-06-05 16:42:08.000000000 -0500
-+++ src/nspr-4.10.6/nspr/pr/include/md/_pth.h	2014-10-19 08:13:30.894514000 -0500
+--- origsrc/nspr-4.10.8/nspr/pr/include/md/_pth.h	2015-01-22 14:44:59.000000000 -0600
++++ src/nspr-4.10.8/nspr/pr/include/md/_pth.h	2015-06-01 11:25:15.750353200 -0500
 @@ -116,7 +116,7 @@
  	|| defined(LINUX) || defined(__GNU__) || defined(__GLIBC__) \
  	|| defined(HPUX) || defined(FREEBSD) \
@@ -625,8 +631,8 @@
  	|| defined(UNIXWARE) || defined(RISCOS) || defined(SYMBIAN)
  #define _PT_PTHREAD_YIELD()            	sched_yield()
  #else
---- origsrc/nspr-4.10.6/nspr/pr/include/md/prosdep.h	2014-06-05 16:42:08.000000000 -0500
-+++ src/nspr-4.10.6/nspr/pr/include/md/prosdep.h	2014-10-19 08:13:30.910114100 -0500
+--- origsrc/nspr-4.10.8/nspr/pr/include/md/prosdep.h	2015-01-22 14:44:59.000000000 -0600
++++ src/nspr-4.10.8/nspr/pr/include/md/prosdep.h	2015-06-01 11:25:15.760353200 -0500
 @@ -34,6 +34,9 @@ PR_BEGIN_EXTERN_C
  #if defined(AIX)
  #include "md/_aix.h"
@@ -637,8 +643,8 @@
  #elif defined(FREEBSD)
  #include "md/_freebsd.h"
  
---- origsrc/nspr-4.10.6/nspr/pr/src/linking/prlink.c	2014-06-05 16:42:08.000000000 -0500
-+++ src/nspr-4.10.6/nspr/pr/src/linking/prlink.c	2014-10-19 08:13:30.910114100 -0500
+--- origsrc/nspr-4.10.8/nspr/pr/src/linking/prlink.c	2015-01-22 14:44:59.000000000 -0600
++++ src/nspr-4.10.8/nspr/pr/src/linking/prlink.c	2015-06-01 11:25:15.760353200 -0500
 @@ -348,8 +348,22 @@ PR_GetLibraryName(const char *path, cons
              fullname = PR_smprintf("%s", lib);
          }
@@ -664,8 +670,8 @@
      if (strstr(lib, PR_DLL_SUFFIX) == NULL)
      {
          if (path) {
---- origsrc/nspr-4.10.6/nspr/pr/src/md/unix/cygwin.c	1969-12-31 18:00:00.000000000 -0600
-+++ src/nspr-4.10.6/nspr/pr/src/md/unix/cygwin.c	2014-10-19 08:13:30.910114100 -0500
+--- origsrc/nspr-4.10.8/nspr/pr/src/md/unix/cygwin.c	1969-12-31 18:00:00.000000000 -0600
++++ src/nspr-4.10.8/nspr/pr/src/md/unix/cygwin.c	2015-06-01 11:25:15.760353200 -0500
 @@ -0,0 +1,114 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* ***** BEGIN LICENSE BLOCK *****
@@ -781,8 +787,8 @@
 +	return PR_FAILURE;
 +}
 +#endif /* ! _PR_PTHREADS */
---- origsrc/nspr-4.10.6/nspr/pr/src/md/unix/uxrng.c	2014-06-05 16:42:08.000000000 -0500
-+++ src/nspr-4.10.6/nspr/pr/src/md/unix/uxrng.c	2014-10-19 08:13:30.910114100 -0500
+--- origsrc/nspr-4.10.8/nspr/pr/src/md/unix/uxrng.c	2015-01-22 14:44:59.000000000 -0600
++++ src/nspr-4.10.8/nspr/pr/src/md/unix/uxrng.c	2015-06-01 11:25:15.760353200 -0500
 @@ -86,7 +86,7 @@ GetHighResClock(void *buf, size_t maxbyt
  
  #elif (defined(LINUX) || defined(FREEBSD) || defined(__FreeBSD_kernel__) \
@@ -792,8 +798,8 @@
  #include <sys/types.h>
  #include <sys/stat.h>
  #include <fcntl.h>
---- origsrc/nspr-4.10.6/nspr/pr/src/pthreads/ptio.c	2014-06-05 16:42:08.000000000 -0500
-+++ src/nspr-4.10.6/nspr/pr/src/pthreads/ptio.c	2014-10-19 08:13:30.925714100 -0500
+--- origsrc/nspr-4.10.8/nspr/pr/src/pthreads/ptio.c	2015-01-22 14:44:59.000000000 -0600
++++ src/nspr-4.10.8/nspr/pr/src/pthreads/ptio.c	2015-06-01 11:25:15.770353200 -0500
 @@ -28,7 +28,7 @@
  #include <sys/uio.h>
  #include <sys/file.h>
@@ -821,8 +827,8 @@
  #define _PR_FCNTL_FLAGS O_NONBLOCK
  #else
  #error "Can't determine architecture"
---- origsrc/nspr-4.10.6/nspr/pr/src/pthreads/ptthread.c	2014-06-05 16:42:08.000000000 -0500
-+++ src/nspr-4.10.6/nspr/pr/src/pthreads/ptthread.c	2014-10-19 08:13:30.925714100 -0500
+--- origsrc/nspr-4.10.8/nspr/pr/src/pthreads/ptthread.c	2015-01-22 14:44:59.000000000 -0600
++++ src/nspr-4.10.8/nspr/pr/src/pthreads/ptthread.c	2015-06-01 11:25:15.770353200 -0500
 @@ -21,7 +21,7 @@
  #include <signal.h>
  #include <dlfcn.h>

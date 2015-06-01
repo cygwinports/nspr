@@ -1,5 +1,5 @@
 NAME="nspr"
-VERSION=4.10.7
+VERSION=4.10.8
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="Netscape Portable Runtime library"
@@ -9,7 +9,7 @@ client, many of Netscape/AOL/iPlanet's and other software offerings."
 HOMEPAGE="http://www.mozilla.org/projects/nspr/"
 SRC_URI="ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${VERSION}/src/nspr-${VERSION}.tar.gz"
 PATCH_URI="
-	4.10.6-cygwin.patch
+	4.10.8-cygwin.patch
 	4.7.4-gcc43.patch
 "
 
@@ -40,6 +40,9 @@ src_install() {
 
 	dodir /usr
 	cp -RL dist/* ${D}/usr
+
+	# no need for static libs
+	rm -f ${D}/usr/lib/lib*_s.a
 
 	sed -i -e 's|-Wl,-R$libdir ||g' ${D}/usr/bin/nspr-config
 	sed -i -e 's| -Wl,-R${libdir}||g' ${D}/usr/lib/pkgconfig/nspr.pc
