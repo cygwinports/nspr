@@ -76,13 +76,14 @@
      NSINSTALL='$(CYGWIN_WRAPPER) nsinstall'
      if test `echo "${PATH}" | grep -c \;` = 0; then
          CYGWIN_WRAPPER='sh $(topsrcdir)/build/cygwin-wrapper'
-@@ -1344,6 +1357,27 @@ case "$target" in
+@@ -1344,6 +1357,28 @@ case "$target" in
  
      ;;
  
 +*-cygwin*)
 +    AC_DEFINE(CYGWIN)
 +    AC_DEFINE(XP_UNIX)
++    AC_DEFINE(_GNU_SOURCE)
 +    RESOLVE_LINK_SYMBOLS=1
 +    AC_DEFINE(HAVE_SOCKLEN_T)
 +    AC_DEFINE(HAVE_FCNTL_FILE_LOCKING)
